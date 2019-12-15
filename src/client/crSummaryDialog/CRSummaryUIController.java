@@ -49,6 +49,7 @@ public class CRSummaryUIController implements ClientUI {
             clientController = ClientController.getInstance(this);
         } catch (IOException e) {
             e.printStackTrace();
+            IcmUtils.displayErrorMsg(e.getMessage());
         }
         // set the change-event handler for the status (make the button enable/disable)
         phaseChoiceBox.valueProperty().addListener(new ChangeListener<String>() {
