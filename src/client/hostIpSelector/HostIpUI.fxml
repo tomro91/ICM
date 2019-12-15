@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="330.0" prefWidth="300.0"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="client.hostIpSelector.HostIpUIController">
+    <children>
+        <Label layoutX="9.0" layoutY="113.0" text="Host IP Address:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="ipTextField" layoutX="174.0" layoutY="113.0" prefHeight="31.0" prefWidth="112.0"
+                   promptText="127.0.0.1" text="127.0.0.1"/>
+        <Button fx:id="loginButton" layoutX="107.0" layoutY="234.0" mnemonicParsing="false" onAction="#login"
+                prefHeight="42.0" prefWidth="86.0" text="Login"/>
+        <TextField fx:id="hostTextField" layoutX="174.0" layoutY="164.0" prefHeight="31.0" prefWidth="112.0"
+                   promptText="5555" text="5555"/>
+        <Label layoutX="14.0" layoutY="165.0" text="Host Port:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Label layoutX="73.0" layoutY="30.0" text="ICM Prototype">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
