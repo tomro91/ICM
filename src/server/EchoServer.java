@@ -77,7 +77,7 @@ public class EchoServer extends AbstractServer {
                 dbConnection.updateRequestDetails(requirementList);
                 break;
 
-            case Add_New_Request:
+            case Submit_New_Request:
 
                 break;
         }
