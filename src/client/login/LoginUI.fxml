@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="PASSWORD_FIELD" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="client.login.LoginUIController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="176.0" layoutY="95.0" prefHeight="22.0" prefWidth="151.0" text="Login to ICM">
          <font>
@@ -29,7 +29,7 @@
          </font>
       </Label>
       <TextField fx:id="userName" layoutX="140.0" layoutY="175.0" prefHeight="30.0" prefWidth="210.0" promptText="Enter username" style="-fx-background-radius: 10;" />
-      <Button fx:id="loginButton" layoutX="269.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="81.0" text="Login">
+      <Button fx:id="loginButton" layoutX="269.0" layoutY="312.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Login">
          <font>
             <Font size="16.0" />
          </font>
@@ -39,9 +39,9 @@
       <FontAwesomeIconView glyphName="LOCK" layoutX="327.0" layoutY="265.0" size="15.0" />
       <FontAwesomeIconView glyphName="USER" layoutX="143.0" layoutY="121.0" size="25.0" wrappingWidth="24.30954360961914" />
       <ImageView fitHeight="69.0" fitWidth="151.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../logo6.PNG" />
-         </image>
+<!--         <image>-->
+<!--            <Image url="@../logo6.PNG" />-->
+<!--         </image>-->
       </ImageView>
    </children>
 </AnchorPane>
