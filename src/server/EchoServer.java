@@ -87,10 +87,9 @@ public class EchoServer extends AbstractServer {
             case Get_All_Requests_New:
                 System.out.println("server handle Get_All_Requests_New");
                 // pass the request to the database
-                List<ChangeRequest> requests;
-                requests = dbConnection.getAllRequests(serverService.getParams());
-                serverService.setParams(requests);
-                System.out.println(requests);
+                List<List<ChangeRequest>> allRequests;
+                allRequests = dbConnection.getAllRequests(serverService.getParams());
+                serverService.setParams(allRequests);
                 try {
                     // pass the result back to client controller
                     client.sendToClient(serverService);

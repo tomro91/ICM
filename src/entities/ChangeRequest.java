@@ -3,6 +3,7 @@ package entities;
 import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ChangeRequest implements Serializable {
 
@@ -171,5 +172,16 @@ public class ChangeRequest implements Serializable {
 	}
 
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ChangeRequest that = (ChangeRequest) o;
+		return id.equals(that.id);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

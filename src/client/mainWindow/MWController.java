@@ -113,6 +113,7 @@ public class MWController implements ClientUI {
         dateColumn1.setCellValueFactory(new PropertyValueFactory<>("date"));
         currPhaseColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhase"));
         phaseStatusColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
+        phaseLeaderColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
 
         // init tables double clicks to open change request
         myTableView.setRowFactory(tv -> {
@@ -146,6 +147,7 @@ public class MWController implements ClientUI {
     }
 
     private void showRequestDialog() {
+
     }
 
 
@@ -177,7 +179,10 @@ public class MWController implements ClientUI {
 
     @Override
     public void handleMessageFromClientController(ServerService serverService) {
-        myRequests.setAll(serverService.getParams());
+        List<List<ChangeRequest>> allRequests = serverService.getParams();
+        myRequests.setAll(allRequests.get(0));
         myTableView.setItems(myRequests);
+        inMyTreatmentRequests.setAll(allRequests.get(1));
+        workTableView.setItems(inMyTreatmentRequests);
     }
 }
