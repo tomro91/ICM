@@ -5,17 +5,19 @@ import client.ClientUI;
 import common.IcmUtils;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entities.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import server.ServerService;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MWController implements ClientUI {
 
@@ -74,6 +76,8 @@ public class MWController implements ClientUI {
 
     // class local variables
     private ClientController clientController;
+    private ObservableList<ChangeRequest> myRequests;
+    private ObservableList<ChangeRequest> inMyTreatmentRequests;
 
     public void initialize() {
         try {
@@ -92,7 +96,56 @@ public class MWController implements ClientUI {
             createReportIcon.setVisible(false);
         }
 
+        // init request lists
+        myRequests = FXCollections.observableArrayList();
+        inMyTreatmentRequests = FXCollections.observableArrayList();
 
+        // init tables columns
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        infoSystemColumn.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        currPhaseColumn.setCellValueFactory(new PropertyValueFactory<>("currPhase"));
+        phaseStatusColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
+        phaseLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
+
+        idColumn1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        infoSystemColumn1.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
+        dateColumn1.setCellValueFactory(new PropertyValueFactory<>("date"));
+        currPhaseColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhase"));
+        phaseStatusColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
+
+        // init tables double clicks to open change request
+        myTableView.setRowFactory(tv -> {
+            TableRow<ChangeRequest> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    showRequestDialog();
+                }
+            });
+            return row;
+        });
+
+        workTableView.setRowFactory(tv -> {
+            TableRow<ChangeRequest> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    showRequestDialog();
+                }
+            });
+            return row;
+        });
+
+        // load data into tables
+        // prepare service request to pass to server
+        List<ChangeInitiator> userList = new ArrayList<>();
+        userList.add(ClientController.getUser());
+        ServerService serverService = new ServerService(ServerService.DatabaseService.Get_All_Requests_New, userList);
+        // pass to client controller.
+        // client controller uses 'handleMessageFromClientController' function to load server answer into the ui
+        clientController.handleMessageFromClientUI(serverService);
+    }
+
+    private void showRequestDialog() {
     }
 
 
@@ -124,6 +177,7 @@ public class MWController implements ClientUI {
 
     @Override
     public void handleMessageFromClientController(ServerService serverService) {
-
+        myRequests.setAll(serverService.getParams());
+        myTableView.setItems(myRequests);
     }
 }

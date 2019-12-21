@@ -3,6 +3,7 @@ package server;// This file contains material supporting section 3.7 of the text
 // license found at www.lloseng.com 
 
 import entities.ChangeInitiator;
+import entities.ChangeRequest;
 import entities.Requirement;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -74,6 +75,22 @@ public class EchoServer extends AbstractServer {
                 requirements = dbConnection.getAllRequestsFromRequirement();
                 serverService.setParams(requirements);
                 System.out.println(requirements);
+                try {
+                    // pass the result back to client controller
+                    client.sendToClient(serverService);
+                    System.out.println("sent back to client controller");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case Get_All_Requests_New:
+                System.out.println("server handle Get_All_Requests_New");
+                // pass the request to the database
+                List<ChangeRequest> requests;
+                requests = dbConnection.getAllRequests(serverService.getParams());
+                serverService.setParams(requests);
+                System.out.println(requests);
                 try {
                     // pass the result back to client controller
                     client.sendToClient(serverService);

@@ -1,11 +1,9 @@
 package server;
 
-import entities.ChangeInitiator;
-import entities.CiDepartment;
-import entities.Position;
-import entities.Requirement;
+import entities.*;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,8 +98,7 @@ public class DBConnection {
             }
             ChangeInitiator user = new ChangeInitiator();
 
-            String userId = String.valueOf(rs.getInt(1));
-            user.setId(userId);
+            user.setId(rs.getInt(1));
             user.setFirstName(rs.getString(2));
             user.setLastName(rs.getString(3));
             user.setEmail(rs.getString(4));
@@ -120,6 +117,50 @@ public class DBConnection {
         }
         System.out.println("user details returned");
         return userDetails;
+    }
+
+    public List<ChangeRequest> getAllRequests(List<ChangeInitiator> userList) {
+        List<ChangeRequest> allRequests = new ArrayList<>();
+        ChangeInitiator currUser = userList.get(0);
+        try {
+            // create and execute the query
+            // the user is the change initiator
+            PreparedStatement ps = sqlConnection.prepareStatement("SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName, PH.phStatus, U.firstName, U.lastName " +
+                    "FROM changeRequest CR, phase PH, users U " +
+                    "WHERE CR.crIDuser = ? AND CR.crID = PH.phIDChangeRequest AND CR.crCurrPhaseName = PH.phPhaseName AND PH.phIDPhaseLeader = U.IDuser");
+            // the user is the phase leader
+            PreparedStatement ps2 = sqlConnection.prepareStatement("SELECT * FROM changeRequest CR, phase PH WHERE CR.crID = PH.phIDChangeRequest AND CR.crCurrPhaseName = PH.phPhaseName AND PH.phIDPhaseLeader = ?");
+            //the user have some position in the current phase
+            PreparedStatement ps3 = sqlConnection.prepareStatement("SELECT * FROM changeRequest CR, ieInPhase IE WHERE CR.crID = IE.crID AND CR.crCurrPhaseName = IE.iePhaseName AND IE.IDieInPhase = ?");
+
+            ps.setInt(1, currUser.getId());
+            ps2.setInt(1, currUser.getId());
+            ps3.setInt(1, currUser.getId());
+
+            ResultSet rs = ps.executeQuery();
+            ResultSet rs2 = ps2.executeQuery();
+            ResultSet rs3 = ps3.executeQuery();
+
+            // go throw the results and add it to arrayList
+            rs.beforeFirst();
+            while (rs.next()) {
+                ChangeRequest row = new ChangeRequest();
+                row.setId(rs.getInt(1));
+                row.setInfoSystem(InfoSystem.valueOf(rs.getString(2)));
+                row.setDate(rs.getDate(3).toLocalDate());
+                row.setCurrPhase(Phase.PhaseName.valueOf(rs.getString(4)));
+                row.setCurrPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString(5)));
+                row.setCurrPhasePhaseLeaderName(rs.getString(6) + " " + rs.getString(7));
+                allRequests.add(row);
+                System.out.println(row);
+            }
+            ps.close();
+            System.out.println("1 succeed");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allRequests;
     }
 }
 

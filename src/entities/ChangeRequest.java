@@ -1,11 +1,12 @@
 package entities;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ChangeRequest {
+public class ChangeRequest implements Serializable {
 
-	private String id;
+	private Integer id;
 	private InfoSystem infoSystem;
 	private String currState;
 	private String requestedChange;
@@ -15,9 +16,14 @@ public class ChangeRequest {
 	private LocalDate date;
 	private Phase[] phases;
 	private Phase.PhaseName currPhase;
+	private Phase.PhaseStatus currPhaseStatus;
+	private String currPhasePhaseLeaderName;
 	private boolean suspended;
 
-	public String getId() {
+
+
+
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -25,7 +31,7 @@ public class ChangeRequest {
 	 * 
 	 * @param id
 	 */
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -137,10 +143,6 @@ public class ChangeRequest {
 		this.currPhase = currPhase;
 	}
 
-	public boolean getSuspended() {
-		return this.suspended;
-	}
-
 	/**
 	 * 
 	 * @param suspended
@@ -148,5 +150,26 @@ public class ChangeRequest {
 	public void setSuspended(boolean suspended) {
 		this.suspended = suspended;
 	}
+
+	public boolean isSuspended() {
+		return suspended;
+	}
+	public Phase.PhaseStatus getCurrPhaseStatus() {
+		return currPhaseStatus;
+	}
+
+	public void setCurrPhaseStatus(Phase.PhaseStatus currPhaseStatus) {
+		this.currPhaseStatus = currPhaseStatus;
+	}
+
+	public String getCurrPhasePhaseLeaderName() {
+		return currPhasePhaseLeaderName;
+	}
+
+	public void setCurrPhasePhaseLeaderName(String currPhasePhaseLeaderName) {
+		this.currPhasePhaseLeaderName = currPhasePhaseLeaderName;
+	}
+
+
 
 }

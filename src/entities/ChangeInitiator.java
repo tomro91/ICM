@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ChangeInitiator implements Serializable {
 
-	private String id;
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private Title title;
@@ -42,7 +42,7 @@ public class ChangeInitiator implements Serializable {
 		return this.password;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -74,7 +74,7 @@ public class ChangeInitiator implements Serializable {
 		this.password = password;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -89,7 +89,8 @@ public class ChangeInitiator implements Serializable {
 	public enum Title {
 		STUDENT,
 		LECTURER,
-		ADMINISTRATION
+		ADMINISTRATION,
+		INFOENGINEER
 	}
 
 }

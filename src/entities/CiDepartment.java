@@ -9,5 +9,6 @@ public enum CiDepartment {
 	INFO_SYSTEMS,
 	OPTICS,
 	MATH,
-	PHYSIQUES
+	PHYSIQUES,
+	IT
 }
