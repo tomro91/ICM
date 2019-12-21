@@ -12,6 +12,12 @@ import java.io.IOException;
 
 public class IcmUtils {
 
+    public enum Scenes {
+        Main_Window,
+        Login,
+        Main_Window_New
+    }
+
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
@@ -74,6 +80,38 @@ public class IcmUtils {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(contentText);
         alert.showAndWait();
+    }
+
+    public static void loadScene(ClientUI clientUI, IcmUtils.Scenes sceneName) throws IOException {
+        String sceneTitle;
+        String fxmlPath;
+        int width;
+        int height;
+
+        switch (sceneName) {
+            case Login:
+                sceneTitle = "ICM - Login";
+                fxmlPath = "/client/login/LoginUI.fxml";
+                width = 500;
+                height = 410;
+                break;
+            case Main_Window:
+                sceneTitle = "ICM Main Window";
+                fxmlPath = "/client/mainWindow/MainWindowUI.fxml";
+                width = 590;
+                height = 565;
+                break;
+            case Main_Window_New:
+                sceneTitle = "ICM Main Window";
+                fxmlPath = "/client/mainWindow/MainWindow.fxml";
+                width = 1000;
+                height = 650;
+                break;
+            default:
+                throw new IOException();
+        }
+
+        loadScene(clientUI, sceneTitle, fxmlPath, width, height);
     }
 
     public static void loadScene(ClientUI clientUI, String sceneTitle, String fxmlPath, int width, int height) throws IOException {

@@ -13,6 +13,14 @@ public class Phase {
 	private String changeRequestId;
 	private int phaseId;
 
+	public enum PhaseName {
+		EVALUATION,
+		EXAMINATION,
+		EXECUTION,
+		VALIDATION,
+		CLOSING
+	}
+
 	public PhaseName getName() {
 		return this.name;
 	}

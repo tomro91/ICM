@@ -60,7 +60,7 @@ public class LoginUIController implements ClientUI {
                 List<ChangeInitiator> userList = serverService.getParams();
                 ClientController.setUser(userList.get(0));
                 try {
-                    IcmUtils.loadHomeScene(this);
+                    IcmUtils.loadScene(this, IcmUtils.Scenes.Main_Window_New);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

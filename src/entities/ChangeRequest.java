@@ -14,7 +14,7 @@ public class ChangeRequest {
 	private File[] files;
 	private LocalDate date;
 	private Phase[] phases;
-	private PhaseName currPhase;
+	private Phase.PhaseName currPhase;
 	private boolean suspended;
 
 	public String getId() {
@@ -125,7 +125,7 @@ public class ChangeRequest {
 		this.phases = phases;
 	}
 
-	public PhaseName getCurrPhase() {
+	public Phase.PhaseName getCurrPhase() {
 		return this.currPhase;
 	}
 
@@ -133,7 +133,7 @@ public class ChangeRequest {
 	 * 
 	 * @param currPhase
 	 */
-	public void setCurrPhase(PhaseName currPhase) {
+	public void setCurrPhase(Phase.PhaseName currPhase) {
 		this.currPhase = currPhase;
 	}
 
