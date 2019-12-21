@@ -2,6 +2,7 @@ package server;// This file contains material supporting section 3.7 of the text
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
+import entities.ChangeInitiator;
 import entities.Requirement;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -45,14 +46,27 @@ public class EchoServer extends AbstractServer {
      * @param msg    The message received from the client.
      * @param client The connection from which the message originated.
      */
-    public void handleMessageFromClient
-    (Object msg, ConnectionToClient client) {
+    public void handleMessageFromClient(Object msg, ConnectionToClient client) {
+
         System.out.println("Message received: " + msg + " from " + client);
         // extract the requested service from the server
         ServerService serverService = (ServerService) msg;
-//        DatabaseServices service = (DatabaseServices) msgArr.get(0);
 
         switch (serverService.getDatabaseService()) {
+
+            case Login:
+                System.out.println("server received login request for: " + serverService.getParams());
+
+                List<ChangeInitiator> loginRes = dbConnection.login(serverService.getParams());
+                serverService.setParams(loginRes);
+                try {
+                    client.sendToClient(serverService);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
             case Get_All_Requests:
                 System.out.println("server handle Get_All_Requests");
                 // pass the request to the database
@@ -78,8 +92,9 @@ public class EchoServer extends AbstractServer {
                 break;
 
             case Submit_New_Request:
-
                 break;
+
+
         }
     }
 

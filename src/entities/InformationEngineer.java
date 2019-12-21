@@ -17,7 +17,7 @@ public class InformationEngineer extends ChangeInitiator {
 		this.managedSystem = managedSystem;
 	}
 
-	public InformationEngineerPhasePosition.PhasePosition getPosition() {
+	public Position getPosition() {
 		// TODO - implement InformationEngineer.getPosition
 		throw new UnsupportedOperationException();
 	}

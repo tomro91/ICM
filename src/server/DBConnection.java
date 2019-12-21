@@ -1,5 +1,8 @@
 package server;
 
+import entities.ChangeInitiator;
+import entities.CiDepartment;
+import entities.Position;
 import entities.Requirement;
 
 import java.sql.*;
@@ -78,6 +81,45 @@ public class DBConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<ChangeInitiator> login(List<String> params) {
+        System.out.println("database received login request for: " + params);
+        List<ChangeInitiator> userDetails = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = (?) AND password = (?)");
+            ps.setString(1, params.get(0));
+            ps.setString(2, params.get(1));
+            ResultSet rs = ps.executeQuery();
+
+            // wrong user name or password
+            if(rs.next() == false) {
+                System.out.println("user not found");
+                return null;
+            }
+            ChangeInitiator user = new ChangeInitiator();
+
+            String userId = String.valueOf(rs.getInt(1));
+            user.setId(userId);
+            user.setFirstName(rs.getString(2));
+            user.setLastName(rs.getString(3));
+            user.setEmail(rs.getString(4));
+            user.setPassword(rs.getString(5));
+            user.setTitle(ChangeInitiator.Title.valueOf(rs.getString(6)));
+            user.setPhoneNumber(rs.getString(7));
+            user.setDepartment(CiDepartment.valueOf(rs.getString(8)));
+            user.setPosition(Position.valueOf(rs.getString(9)));
+
+            userDetails.add(user);
+
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("user details returned");
+        return userDetails;
     }
 }
 

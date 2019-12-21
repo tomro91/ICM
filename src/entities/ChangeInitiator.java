@@ -1,7 +1,10 @@
 package entities;
 
-public class ChangeInitiator {
+import java.io.Serializable;
 
+public class ChangeInitiator implements Serializable {
+
+	private String id;
 	private String firstName;
 	private String lastName;
 	private Title title;
@@ -9,7 +12,7 @@ public class ChangeInitiator {
 	private String phoneNumber;
 	private CiDepartment department;
 	private String password;
-	private String id;
+	private Position position;
 
 	public String getFirstName() {
 		return this.firstName;
@@ -43,6 +46,45 @@ public class ChangeInitiator {
 		return this.id;
 	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setTitle(Title title) {
+		this.title = title;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setDepartment(CiDepartment department) {
+		this.department = department;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 
 	public enum Title {
 		STUDENT,

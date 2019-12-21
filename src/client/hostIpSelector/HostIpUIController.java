@@ -28,7 +28,8 @@ public class HostIpUIController implements ClientUI {
 
         // load the gui and starting it
         try {
-            IcmUtils.loadScene(this, "ICM - Prototype", "/client/mainWindow/MainWindowUI.fxml", 590, 565);
+            IcmUtils.loadScene(this, "ICM - Login", "/client/login/LoginUI.fxml", 500, 410);
+//            IcmUtils.loadHomeScene(this);
 
         } catch (Exception e) {
             e.printStackTrace();

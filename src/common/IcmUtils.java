@@ -61,7 +61,6 @@ public class IcmUtils {
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
-        System.exit(1);
     }
 
     public static void displayErrorMsg(String title, String contentText) {
@@ -69,19 +68,18 @@ public class IcmUtils {
         alert.setTitle(title);
         alert.setContentText(contentText);
         alert.showAndWait();
-        System.exit(1);
     }
 
     public static void displayErrorMsg(String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(contentText);
         alert.showAndWait();
-        System.exit(1);
     }
 
     public static void loadScene(ClientUI clientUI, String sceneTitle, String fxmlPath, int width, int height) throws IOException {
+        System.out.println("Loading scene: " + sceneTitle);
         FXMLLoader loader = new FXMLLoader();
-        Parent root = loader.load(clientUI.getClass().getResource(fxmlPath).openStream());
+        Parent root = loader.load(clientUI.getClass().getResource(fxmlPath));
         Scene scene = new Scene(root, width, height);
         Stage primaryStage = ClientMain.getPrimaryStage();
         primaryStage.setScene(scene);
@@ -90,6 +88,6 @@ public class IcmUtils {
     }
 
     public static void loadHomeScene(ClientUI clientUI) throws IOException {
-        loadScene(clientUI, "ICM prototype", "/client/mainWindow/MainWindowUI.fxml", 590, 565);
+        loadScene(clientUI, "ICM Main Window", "/client/mainWindow/MainWindowUI.fxml", 590, 565);
     }
 }

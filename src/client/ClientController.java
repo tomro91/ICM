@@ -1,6 +1,8 @@
 package client;
 
 import common.IcmUtils;
+import entities.ChangeInitiator;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import ocsf.client.AbstractClient;
 import server.ServerService;
@@ -17,6 +19,7 @@ public class ClientController extends AbstractClient {
 
     private static ClientUI clientUI;
     private static ClientController clientController = null;
+    private static ChangeInitiator user = new ChangeInitiator();
 
 
     /**
@@ -55,8 +58,13 @@ public class ClientController extends AbstractClient {
      */
     public void handleMessageFromServer(Object msg) {
         ServerService serverService = (ServerService) msg;
-        clientUI.handleMessageFromClientController(serverService);
-        System.out.println("sent to clientUI " + serverService.getDatabaseService());
+        System.out.println("Sending to clientUI: " + serverService.getDatabaseService());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clientUI.handleMessageFromClientController(serverService);
+            }
+        });
     }
 
     /**
@@ -83,6 +91,14 @@ public class ClientController extends AbstractClient {
         } catch (IOException e) {
         }
         System.exit(0);
+    }
+
+    public static ChangeInitiator getUser() {
+        return user;
+    }
+
+    public static void setUser(ChangeInitiator user) {
+        ClientController.user = user;
     }
 }
 //End of ChatClient class
