@@ -15,7 +15,8 @@ public class IcmUtils {
     public enum Scenes {
         Main_Window,
         Login,
-        Main_Window_New
+        Main_Window_New,
+        Change_Request_Summary
     }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -104,6 +105,13 @@ public class IcmUtils {
             case Main_Window_New:
                 sceneTitle = "ICM Main Window";
                 fxmlPath = "/client/mainWindow/MainWindow.fxml";
+                width = 1000;
+                height = 650;
+                break;
+
+            case Change_Request_Summary:
+                sceneTitle = "ICM Change Request Summary";
+                fxmlPath = "/client/crDetails/CrDetailsBase.fxml";
                 width = 1000;
                 height = 650;
                 break;

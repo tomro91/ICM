@@ -2,6 +2,7 @@ package client.mainWindow;
 
 import client.ClientController;
 import client.ClientUI;
+import client.crDetails.CrDetailsUIController;
 import common.IcmUtils;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entities.*;
@@ -120,6 +121,7 @@ public class MWController implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    CrDetailsUIController.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });
@@ -130,6 +132,7 @@ public class MWController implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    CrDetailsUIController.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });
@@ -147,7 +150,11 @@ public class MWController implements ClientUI {
     }
 
     private void showRequestDialog() {
-
+        try {
+            IcmUtils.loadScene(this, IcmUtils.Scenes.Change_Request_Summary);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -174,7 +181,6 @@ public class MWController implements ClientUI {
 
     @FXML
     void showNewRequestDialog(ActionEvent event) {
-
     }
 
     @Override

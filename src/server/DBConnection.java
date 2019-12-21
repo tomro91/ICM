@@ -86,7 +86,7 @@ public class DBConnection {
         List<ChangeInitiator> userDetails = new ArrayList<>();
 
         try {
-            PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = (?) AND password = (?)");
+            PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ? AND password = ?");
             ps.setString(1, params.get(0));
             ps.setString(2, params.get(1));
             ResultSet rs = ps.executeQuery();
@@ -136,7 +136,7 @@ public class DBConnection {
             );
 
             // go throw the results and add it to arrayList
-            Set<ChangeRequest> tempSet = insertRequestsIntoList(currUser.getId());
+            Set<ChangeRequest> tempSet = (Set<ChangeRequest>) insertRequestsIntoList(currUser.getId());
             myRequests.addAll(tempSet);
             System.out.println("1 succeed");
 
@@ -167,9 +167,6 @@ public class DBConnection {
         }
         return allRequests;
     }
-
-
-    // helper functions
 
     private Set<ChangeRequest> insertRequestsIntoList(int userId) throws SQLException {
         ps.setInt(1, userId);
