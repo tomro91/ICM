@@ -1,16 +1,16 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Phase {
+public class Phase implements Serializable {
 
 	private PhaseName name;
 	private InformationEngineer leader;
 	private LocalDate deadLine;
 	private PhaseStatus phaseStatus;
 	private boolean extensionRequest;
-	private int phaseExceptionDuration;
-	private String changeRequestId;
+	private Integer changeRequestId;
 	private LocalDate exceptionTime;
 
 	public enum PhaseName {
@@ -81,19 +81,8 @@ public class Phase {
 		this.extensionRequest = extensionRequest;
 	}
 
-	public int getPhaseExceptionDuration() {
-		return this.phaseExceptionDuration;
-	}
 
-	/**
-	 * 
-	 * @param phaseExceptionDuration
-	 */
-	public void setPhaseExceptionDuration(int phaseExceptionDuration) {
-		this.phaseExceptionDuration = phaseExceptionDuration;
-	}
-
-	public String getChangeRequestId() {
+	public Integer getChangeRequestId() {
 		return this.changeRequestId;
 	}
 
@@ -101,7 +90,7 @@ public class Phase {
 	 * 
 	 * @param changeRequestId
 	 */
-	public void setChangeRequestId(String changeRequestId) {
+	public void setChangeRequestId(Integer changeRequestId) {
 		this.changeRequestId = changeRequestId;
 	}
 

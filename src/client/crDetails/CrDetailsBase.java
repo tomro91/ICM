@@ -5,6 +5,7 @@ import client.ClientController;
 import client.ClientUI;
 import common.IcmUtils;
 import entities.ChangeRequest;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -19,8 +20,6 @@ import java.util.List;
 
 public class CrDetailsBase implements ClientUI {
 
-    @FXML
-    private AnchorPane changeRequestIdTextField;
     @FXML
     private TextField changeRequestIDTextField;
     @FXML
@@ -68,6 +67,7 @@ public class CrDetailsBase implements ClientUI {
         params.add(ClientController.getUser().getId());
         params.add(currRequest.getId());
 
+
         ServerService loadRequestData = new ServerService(ServerService.DatabaseService.Get_Request_Details, params);
 
         clientController.handleMessageFromClientUI(loadRequestData);
@@ -96,6 +96,23 @@ public class CrDetailsBase implements ClientUI {
 
     @Override
     public void handleMessageFromClientController(ServerService serverService) {
+        switch (serverService.getDatabaseService()){
+            case Get_Request_Details:
+                System.out.println("adding details to screen");
+                List<ChangeRequest> crList = serverService.getParams();
+                setCurrRequest(crList.get(0));
 
+                changeRequestIDTextField.setText(String.valueOf(currRequest.getId()));
+                openingDateTextField.setText(currRequest.getDate().toString());
+                initiatorTextField.setText(currRequest.getInitiator().getFirstName() + " " + currRequest.getInitiator().getLastName());
+                infoSystemTextField.setText(currRequest.getInfoSystem().toString());
+                currentPhaseTextField.setText(currRequest.getCurrPhaseName().toString());
+                currentStateTextArea.textProperty().setValue(currRequest.getCurrState());
+                reasonForChangeTextArea.textProperty().setValue(currRequest.getReasonForChange());
+                requestedChangeTextField.textProperty().setValue(currRequest.getRequestedChange());
+                commentsTextArea.textProperty().setValue(currRequest.getComment());
+                phaseDeadLineTextField.setText(currRequest.getPhases().get(0).getDeadLine().toString());
+                break;
+        }
     }
 }

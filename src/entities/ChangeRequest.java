@@ -3,11 +3,13 @@ package entities;
 import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class ChangeRequest implements Serializable {
 
 	private Integer id;
+	private ChangeInitiator initiator;
 	private InfoSystem infoSystem;
 	private String currState;
 	private String requestedChange;
@@ -15,7 +17,7 @@ public class ChangeRequest implements Serializable {
 	private String comment;
 	private File[] files;
 	private LocalDate date;
-	private Phase[] phases;
+	private List<Phase> phases;
 	private Phase.PhaseName currPhaseName;
 	private Phase.PhaseStatus currPhaseStatus;
 	private String currPhasePhaseLeaderName;
@@ -34,6 +36,14 @@ public class ChangeRequest implements Serializable {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public ChangeInitiator getInitiator() {
+		return initiator;
+	}
+
+	public void setInitiator(ChangeInitiator initiator) {
+		this.initiator = initiator;
 	}
 
 	public InfoSystem getInfoSystem() {
@@ -120,7 +130,7 @@ public class ChangeRequest implements Serializable {
 		this.date = date;
 	}
 
-	public Phase[] getPhases() {
+	public List<Phase> getPhases() {
 		return this.phases;
 	}
 
@@ -128,7 +138,7 @@ public class ChangeRequest implements Serializable {
 	 * 
 	 * @param phases
 	 */
-	public void setPhases(Phase[] phases) {
+	public void setPhases(List<Phase> phases) {
 		this.phases = phases;
 	}
 

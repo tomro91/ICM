@@ -100,7 +100,18 @@ public class EchoServer extends AbstractServer {
                 break;
 
             case Get_Request_Details:
-                //TODO: add implementation
+                System.out.println("server handle Get_Request_Details");
+                List<Integer> crParams = serverService.getParams();
+
+                List<ChangeRequest> crList = dbConnection.getRequestDetails(crParams);
+                System.out.println("Get_Request_Details server got data");
+                serverService.setParams(crList);
+                try {
+                    client.sendToClient(serverService);
+                    System.out.println("sent request details to client");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             case Update_Request_Status:

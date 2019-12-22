@@ -3,7 +3,10 @@ package server;
 import entities.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
+import java.util.Date;
 
 
 public class DBConnection {
@@ -204,22 +207,24 @@ public class DBConnection {
         try {
             // get request basic info
             ps = sqlConnection.prepareStatement("SELECT * FROM changeRequest WHERE crID = ?");
-            ps.setInt(1 ,params.get(0));
+            ps.setInt(1 ,params.get(1));
 
             ResultSet rs = ps.executeQuery();
             rs.beforeFirst();
             rs.next();
 
+            ChangeInitiator initiator = new ChangeInitiator();
             cr.setId(rs.getInt("crID"));
             cr.setInfoSystem(InfoSystem.valueOf(rs.getString("crInfoSystem")));
-            cr.setDate(rs.getDate("crData").toLocalDate());
+            cr.setInitiator(initiator);
+            initiator.setId(rs.getInt("crIDuser"));
+            cr.setDate(rs.getDate("crDate").toLocalDate());
             cr.setCurrState(rs.getString("crCurrState"));
             cr.setRequestedChange(rs.getString("crRequestedChange"));
             cr.setReasonForChange(rs.getString("crReasonForChange"));
             cr.setComment(rs.getString("crComments"));
             cr.setCurrPhaseName(Phase.PhaseName.valueOf(rs.getString("crCurrPhaseName")));
             cr.setSuspended(rs.getBoolean("crSuspended"));
-            //TODO: add files
 
             ps.close();
 
@@ -228,8 +233,59 @@ public class DBConnection {
             ps.setInt(1, cr.getId());
             ps.setString(2, cr.getCurrPhaseName().toString());
 
+            rs = ps.executeQuery();
+            rs.beforeFirst();
+            rs.next();
 
-            //TODO: get all request data
+            Phase currPhase = new Phase();
+            InformationEngineer phaseLeader = new InformationEngineer();
+
+            currPhase.setChangeRequestId(cr.getId());
+            currPhase.setName(cr.getCurrPhaseName());
+            currPhase.setLeader(phaseLeader);
+            phaseLeader.setId(rs.getInt("phIDPhaseLeader"));
+            currPhase.setDeadLine(rs.getDate("phDeadLine").toLocalDate());
+            currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
+            currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
+            Date date = rs.getDate("phExceptionTime");
+            if(date != null) {
+                LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                currPhase.setExceptionTime(exceptionDate);
+            }
+
+            crPhases.add(currPhase);
+            ps.close();
+
+            // get phase Leader info
+            ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");
+            ps.setInt(1, params.get(1));
+            rs = ps.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+
+            phaseLeader.setFirstName(rs.getString("firstName"));
+            phaseLeader.setLastName(rs.getString("lastName"));
+            phaseLeader.setEmail(rs.getString("email"));
+
+            cr.setPhases(crPhases);
+
+            crList.add(cr);
+            ps.close();
+
+            // get initiator details
+            ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");
+            ps.setInt(1, params.get(1));
+            rs = ps.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+
+            initiator.setFirstName(rs.getString("firstName"));
+            initiator.setLastName(rs.getString("lastName"));
+            initiator.setEmail(rs.getString("email"));
+            ps.close();
+
+            System.out.println("database got leader");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

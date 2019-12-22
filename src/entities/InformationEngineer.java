@@ -1,6 +1,8 @@
 package entities;
 
-public class InformationEngineer extends ChangeInitiator {
+import java.io.Serializable;
+
+public class InformationEngineer extends ChangeInitiator implements Serializable {
 
 	private InfoSystem managedSystem;
 	private Position position;

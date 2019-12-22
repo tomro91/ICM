@@ -24,25 +24,25 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="changeRequestIDTextField" disable="true" layoutX="178.0" layoutY="119.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+            <TextField fx:id="changeRequestIDTextField" disable="true" layoutX="178.0" layoutY="119.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
             <Label layoutX="23.0" layoutY="167.0" prefHeight="15.0" prefWidth="120.0" text="Opening Date:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="openingDateTextField" disable="true" layoutX="178.0" layoutY="164.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
-            <Label layoutX="22.0" layoutY="210.0" prefHeight="15.0" prefWidth="120.0" text="Initiator:">
+            <TextField fx:id="openingDateTextField" disable="true" layoutX="178.0" layoutY="164.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
+            <Label layoutX="23.0" layoutY="210.0" prefHeight="15.0" prefWidth="120.0" text="Initiator:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="initiatorTextField" disable="true" layoutX="178.0" layoutY="207.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
-            <Label layoutX="349.0" layoutY="122.0" prefHeight="15.0" prefWidth="120.0" text="Info System:">
+            <TextField fx:id="initiatorTextField" disable="true" layoutX="178.0" layoutY="207.0" prefHeight="20.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
+            <Label layoutX="392.0" layoutY="122.0" prefHeight="15.0" prefWidth="120.0" text="Info System:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="infoSystemTextField" disable="true" layoutX="484.0" layoutY="119.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+            <TextField fx:id="infoSystemTextField" disable="true" layoutX="527.0" layoutY="119.0" prefHeight="20.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
             <Label layoutX="23.0" layoutY="286.0" prefHeight="15.0" prefWidth="120.0" text="Current State:">
                <font>
                   <Font size="16.0" />
@@ -53,26 +53,26 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="currentStateTextArea" disable="true" layoutX="176.0" layoutY="286.0" prefHeight="70.0" prefWidth="460.0" wrapText="true" />
-            <TextArea fx:id="requestedChangeTextField" disable="true" layoutX="177.0" layoutY="375.0" prefHeight="70.0" prefWidth="460.0" wrapText="true" />
+            <TextArea fx:id="currentStateTextArea" disable="true" layoutX="176.0" layoutY="286.0" prefHeight="70.0" prefWidth="525.0" style="-fx-background-radius: 10;" wrapText="true" />
+            <TextArea fx:id="requestedChangeTextField" disable="true" layoutX="177.0" layoutY="375.0" prefHeight="70.0" prefWidth="525.0" style="-fx-background-radius: 10;" wrapText="true" />
             <Label layoutX="23.0" layoutY="470.0" prefHeight="20.0" prefWidth="155.0" text="Reason For Change:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="reasonForChangeTextArea" disable="true" layoutX="176.0" layoutY="470.0" prefHeight="70.0" prefWidth="460.0" wrapText="true" />
+            <TextArea fx:id="reasonForChangeTextArea" disable="true" layoutX="176.0" layoutY="470.0" prefHeight="70.0" prefWidth="525.0" style="-fx-background-radius: 10;" wrapText="true" />
             <Label layoutX="23.0" layoutY="561.0" prefHeight="15.0" prefWidth="120.0" text="Comments:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="commentsTextArea" disable="true" layoutX="176.0" layoutY="561.0" prefHeight="70.0" prefWidth="460.0" wrapText="true" />
-            <Label layoutX="353.0" layoutY="167.0" prefHeight="15.0" prefWidth="120.0" text="Current Phase:">
+            <TextArea fx:id="commentsTextArea" disable="true" layoutX="176.0" layoutY="561.0" prefHeight="70.0" prefWidth="525.0" style="-fx-background-radius: 10;" wrapText="true" />
+            <Label layoutX="396.0" layoutY="167.0" prefHeight="15.0" prefWidth="120.0" text="Current Phase:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="currentPhaseTextField" disable="true" layoutX="484.0" layoutY="164.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+            <TextField fx:id="currentPhaseTextField" disable="true" layoutX="527.0" layoutY="164.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="23.0" text="Change Request Details" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="30.0" />
@@ -84,12 +84,12 @@
                   <FontAwesomeIconView glyphName="HOME" size="25" />
                </graphic>
             </Button>
-            <Label layoutX="353.0" layoutY="210.0" prefHeight="15.0" prefWidth="120.0" text="Phase Deadline:">
+            <Label layoutX="396.0" layoutY="210.0" prefHeight="15.0" prefWidth="120.0" text="Phase Deadline:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="phaseDeadLineTextField" disable="true" layoutX="484.0" layoutY="207.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+            <TextField fx:id="phaseDeadLineTextField" disable="true" layoutX="527.0" layoutY="207.0" prefHeight="31.0" prefWidth="175.0" style="-fx-background-radius: 10;" />
          </children>
       </AnchorPane>
    </center>
