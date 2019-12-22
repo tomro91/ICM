@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginUIController implements ClientUI {
+public class Login implements ClientUI {
 
     @FXML
     private TextField userName;

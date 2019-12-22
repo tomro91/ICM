@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="330.0" prefWidth="300.0"
-            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="client.hostIpSelector.HostIpUIController">
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="client.hostIpSelector.HostIpSelector">
     <children>
         <Label layoutX="9.0" layoutY="113.0" text="Host IP Address:">
             <font>

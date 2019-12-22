@@ -3,7 +3,6 @@ package server;
 import entities.*;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -168,6 +167,7 @@ public class DBConnection {
         return allRequests;
     }
 
+    // helper function for getAllRequests()
     private Set<ChangeRequest> insertRequestsIntoList(int userId) throws SQLException {
         ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
@@ -179,7 +179,7 @@ public class DBConnection {
             row.setId(rs.getInt(1));
             row.setInfoSystem(InfoSystem.valueOf(rs.getString(2)));
             row.setDate(rs.getDate(3).toLocalDate());
-            row.setCurrPhase(Phase.PhaseName.valueOf(rs.getString(4)));
+            row.setCurrPhaseName(Phase.PhaseName.valueOf(rs.getString(4)));
             row.setCurrPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString(5)));
             row.setCurrPhasePhaseLeaderName(rs.getString(6) + " " + rs.getString(7));
             requestSet.add(row);
@@ -188,6 +188,54 @@ public class DBConnection {
         ps.close();
         return requestSet;
     }
+
+
+    /**
+     * This method handles any messages received from the client.
+     *
+     * @param params [0]    change request ID.
+     * @param params [1]    current user ID.
+     */
+    public List<ChangeRequest> getRequestDetails(List<Integer> params) {
+        ChangeRequest cr = new ChangeRequest();
+        List<Phase> crPhases = new ArrayList<>();
+        List<ChangeRequest> crList = new ArrayList<>();
+
+        try {
+            // get request basic info
+            ps = sqlConnection.prepareStatement("SELECT * FROM changeRequest WHERE crID = ?");
+            ps.setInt(1 ,params.get(0));
+
+            ResultSet rs = ps.executeQuery();
+            rs.beforeFirst();
+            rs.next();
+
+            cr.setId(rs.getInt("crID"));
+            cr.setInfoSystem(InfoSystem.valueOf(rs.getString("crInfoSystem")));
+            cr.setDate(rs.getDate("crData").toLocalDate());
+            cr.setCurrState(rs.getString("crCurrState"));
+            cr.setRequestedChange(rs.getString("crRequestedChange"));
+            cr.setReasonForChange(rs.getString("crReasonForChange"));
+            cr.setComment(rs.getString("crComments"));
+            cr.setCurrPhaseName(Phase.PhaseName.valueOf(rs.getString("crCurrPhaseName")));
+            cr.setSuspended(rs.getBoolean("crSuspended"));
+            //TODO: add files
+
+            ps.close();
+
+            // get request phases
+            ps = sqlConnection.prepareStatement("SELECT * FROM phase WHERE phIDChangeRequest = ? AND phPhaseName = ?");
+            ps.setInt(1, cr.getId());
+            ps.setString(2, cr.getCurrPhaseName().toString());
+
+
+            //TODO: get all request data
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return crList;
+    }
+
 }
 
 

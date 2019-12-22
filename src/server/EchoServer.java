@@ -99,6 +99,10 @@ public class EchoServer extends AbstractServer {
                 }
                 break;
 
+            case Get_Request_Details:
+                //TODO: add implementation
+                break;
+
             case Update_Request_Status:
                 System.out.println("server handle Update_Request_Status");
                 List<String> requirementList = serverService.getParams();

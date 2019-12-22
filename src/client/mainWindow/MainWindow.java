@@ -2,7 +2,7 @@ package client.mainWindow;
 
 import client.ClientController;
 import client.ClientUI;
-import client.crDetails.CrDetailsUIController;
+import client.crDetails.CrDetailsBase;
 import common.IcmUtils;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entities.*;
@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MWController implements ClientUI {
+public class MainWindow implements ClientUI {
 
     @FXML
     private TextField searchChangeRequestTextField;
@@ -121,7 +121,7 @@ public class MWController implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetailsUIController.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
+                    CrDetailsBase.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });
@@ -132,7 +132,7 @@ public class MWController implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetailsUIController.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
+                    CrDetailsBase.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });

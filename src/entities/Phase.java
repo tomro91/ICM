@@ -6,12 +6,12 @@ public class Phase {
 
 	private PhaseName name;
 	private InformationEngineer leader;
-	private LocalDate remainingTime;
+	private LocalDate deadLine;
 	private PhaseStatus phaseStatus;
 	private boolean extensionRequest;
 	private int phaseExceptionDuration;
 	private String changeRequestId;
-	private int phaseId;
+	private LocalDate exceptionTime;
 
 	public enum PhaseName {
 		EVALUATION,
@@ -45,16 +45,16 @@ public class Phase {
 		this.leader = leader;
 	}
 
-	public LocalDate getRemainingTime() {
-		return this.remainingTime;
+	public LocalDate getDeadLine() {
+		return this.deadLine;
 	}
 
 	/**
 	 * 
-	 * @param remainingTime
+	 * @param deadLine
 	 */
-	public void setRemainingTime(LocalDate remainingTime) {
-		this.remainingTime = remainingTime;
+	public void setDeadLine(LocalDate deadLine) {
+		this.deadLine = deadLine;
 	}
 
 	public PhaseStatus getPhaseStatus() {
@@ -105,6 +105,13 @@ public class Phase {
 		this.changeRequestId = changeRequestId;
 	}
 
+	public LocalDate getExceptionTime() {
+		return exceptionTime;
+	}
+
+	public void setExceptionTime(LocalDate exceptionTime) {
+		this.exceptionTime = exceptionTime;
+	}
 
 	public enum PhaseStatus {
 		PHASE_LEADER_ASSIGNED,

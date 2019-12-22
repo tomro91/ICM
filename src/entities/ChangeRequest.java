@@ -16,7 +16,7 @@ public class ChangeRequest implements Serializable {
 	private File[] files;
 	private LocalDate date;
 	private Phase[] phases;
-	private Phase.PhaseName currPhase;
+	private Phase.PhaseName currPhaseName;
 	private Phase.PhaseStatus currPhaseStatus;
 	private String currPhasePhaseLeaderName;
 	private boolean suspended;
@@ -132,16 +132,16 @@ public class ChangeRequest implements Serializable {
 		this.phases = phases;
 	}
 
-	public Phase.PhaseName getCurrPhase() {
-		return this.currPhase;
+	public Phase.PhaseName getCurrPhaseName() {
+		return this.currPhaseName;
 	}
 
 	/**
 	 * 
-	 * @param currPhase
+	 * @param currPhaseName
 	 */
-	public void setCurrPhase(Phase.PhaseName currPhase) {
-		this.currPhase = currPhase;
+	public void setCurrPhaseName(Phase.PhaseName currPhaseName) {
+		this.currPhaseName = currPhaseName;
 	}
 
 	/**

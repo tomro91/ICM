@@ -5,12 +5,11 @@ import client.ClientUI;
 import common.IcmUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import server.ServerService;
 
-public class HostIpUIController implements ClientUI {
+public class HostIpSelector implements ClientUI {
 
     @FXML
     private TextField ipTextField;
@@ -28,7 +27,7 @@ public class HostIpUIController implements ClientUI {
 
         // load the gui and starting it
         try {
-            IcmUtils.loadScene(this, "ICM - Login", "/client/login/LoginUI.fxml", 500, 410);
+            IcmUtils.loadScene(this, "ICM - Login", "/client/login/Login.fxml", 500, 410);
 //            IcmUtils.loadHomeScene(this);
 
         } catch (Exception e) {

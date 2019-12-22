@@ -2,7 +2,6 @@ package client;
 
 import common.IcmUtils;
 import javafx.application.Application;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import server.ServerService;
 
@@ -50,7 +49,7 @@ public class ClientMain extends Application implements ClientUI{
 
         // load the gui and starting it
         try {
-            IcmUtils.loadScene(this, "ICM - Server Setup", "/client/hostIpSelector/HostIpUI.fxml", 300,300);
+            IcmUtils.loadScene(this, "ICM - Server Setup", "/client/hostIpSelector/HostIpSelector.fxml", 300,300);
         } catch (Exception e) {
             e.printStackTrace();
             IcmUtils.displayErrorMsg(e.getMessage());

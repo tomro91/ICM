@@ -92,7 +92,7 @@ public class IcmUtils {
         switch (sceneName) {
             case Login:
                 sceneTitle = "ICM - Login";
-                fxmlPath = "/client/login/LoginUI.fxml";
+                fxmlPath = "/client/login/Login.fxml";
                 width = 500;
                 height = 410;
                 break;
