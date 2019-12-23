@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Phase implements Serializable {
 
@@ -12,6 +13,7 @@ public class Phase implements Serializable {
 	private boolean extensionRequest;
 	private Integer changeRequestId;
 	private LocalDate exceptionTime;
+	private List<IEPhasePosition> iePhasePosition;
 
 	public enum PhaseName {
 		EVALUATION,
@@ -19,6 +21,15 @@ public class Phase implements Serializable {
 		EXECUTION,
 		VALIDATION,
 		CLOSING
+	}
+
+	public enum PhaseStatus {
+		PHASE_LEADER_ASSIGNED,
+		PHASE_EXEC_LEADER_ASSIGNED,
+		TIME_REQUESTED,
+		TIME_APPROVED,
+		IN_PROCESS,
+		DONE
 	}
 
 	public PhaseName getName() {
@@ -102,13 +113,14 @@ public class Phase implements Serializable {
 		this.exceptionTime = exceptionTime;
 	}
 
-	public enum PhaseStatus {
-		PHASE_LEADER_ASSIGNED,
-		PHASE_EXEC_LEADER_ASSIGNED,
-		TIME_REQUESTED,
-		TIME_APPROVED,
-		IN_PROCESS,
-		DONE
+	public List<IEPhasePosition> getIePhasePosition() {
+		return iePhasePosition;
 	}
+
+	public void setIePhasePosition(List<IEPhasePosition> iePhasePosition) {
+		this.iePhasePosition = iePhasePosition;
+	}
+
+
 
 }

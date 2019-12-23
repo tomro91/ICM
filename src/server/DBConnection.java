@@ -196,8 +196,8 @@ public class DBConnection {
     /**
      * This method handles any messages received from the client.
      *
-     * @param params [0]    change request ID.
-     * @param params [1]    current user ID.
+     * @param params [0]    current user ID.
+     * @param params [1]    change request ID.
      */
     public List<ChangeRequest> getRequestDetails(List<Integer> params) {
         ChangeRequest cr = new ChangeRequest();
@@ -256,9 +256,32 @@ public class DBConnection {
             crPhases.add(currPhase);
             ps.close();
 
+            // get Information Engineer Phase Position for the current user
+            ps = sqlConnection.prepareStatement("SELECT * FROM ieInPhase WHERE crID = ? AND iePhaseName = ? AND IDieInPhase = ?");
+            ps.setInt(1, cr.getId());
+            ps.setString(2, cr.getCurrPhaseName().toString());
+            ps.setInt(3, params.get(0));
+
+            List<IEPhasePosition> iePhasePositionArrayList = new ArrayList<>();
+
+            rs = ps.executeQuery();
+            rs.beforeFirst();
+            if(rs.next() != false) {
+                IEPhasePosition iePhasePosition = new IEPhasePosition();
+                iePhasePosition.setInformationEngineer(new InformationEngineer());
+                iePhasePosition.getInformationEngineer().setId(params.get(1));
+                iePhasePosition.setPhaseName(currPhase.getName());
+                iePhasePosition.setPhasePosition(IEPhasePosition.PhasePosition.valueOf(rs.getString("iePhasePosition")));
+
+                iePhasePositionArrayList.add(iePhasePosition);
+                currPhase.setIePhasePosition(iePhasePositionArrayList);
+            }
+
+            ps.close();
+
             // get phase Leader info
             ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");
-            ps.setInt(1, params.get(1));
+            ps.setInt(1, currPhase.getLeader().getId());
             rs = ps.executeQuery();
             rs.beforeFirst();
             rs.next();
@@ -274,7 +297,7 @@ public class DBConnection {
 
             // get initiator details
             ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");
-            ps.setInt(1, params.get(1));
+            ps.setInt(1, cr.getInitiator().getId());
             rs = ps.executeQuery();
             rs.beforeFirst();
             rs.next();

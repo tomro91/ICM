@@ -28,7 +28,7 @@ public class InformationEngineer extends ChangeInitiator implements Serializable
 	 * 
 	 * @param position
 	 */
-	public void setPosition(InformationEngineerPhasePosition.PhasePosition position) {
+	public void setPosition(IEPhasePosition.PhasePosition position) {
 		// TODO - implement InformationEngineer.setPosition
 		throw new UnsupportedOperationException();
 	}

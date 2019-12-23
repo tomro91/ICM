@@ -1,10 +1,19 @@
 package entities;
 
-public class InformationEngineerPhasePosition {
+import java.io.Serializable;
+
+public class IEPhasePosition implements Serializable {
 
 	private InformationEngineer informationEngineer;
-	private int phaseId;
+	private Phase.PhaseName phaseName;
 	private PhasePosition phasePosition;
+
+	public enum PhasePosition {
+		EVALUATOR,
+		EXECUTIVE_LEADER,
+		TESTER,
+		PHASE_LEADER
+	}
 
 	public InformationEngineer getInformationEngineer() {
 		return this.informationEngineer;
@@ -18,16 +27,16 @@ public class InformationEngineerPhasePosition {
 		this.informationEngineer = informationEngineer;
 	}
 
-	public int getPhaseId() {
-		return this.phaseId;
+	public Phase.PhaseName getPhaseName() {
+		return this.phaseName;
 	}
 
 	/**
 	 * 
-	 * @param phaseId
+	 * @param phaseName
 	 */
-	public void setPhaseId(int phaseId) {
-		this.phaseId = phaseId;
+	public void setPhaseName(Phase.PhaseName phaseName) {
+		this.phaseName = phaseName;
 	}
 
 	public PhasePosition getPhasePosition() {
@@ -43,11 +52,6 @@ public class InformationEngineerPhasePosition {
 	}
 
 
-	public enum PhasePosition {
-		EVALUATOR,
-		EXECUTIVE_LEADER,
-		TESTER,
-		PHASE_LEADER
-	}
+
 
 }
