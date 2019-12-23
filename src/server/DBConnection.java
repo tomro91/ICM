@@ -274,9 +274,8 @@ public class DBConnection {
                 iePhasePosition.setPhasePosition(IEPhasePosition.PhasePosition.valueOf(rs.getString("iePhasePosition")));
 
                 iePhasePositionArrayList.add(iePhasePosition);
-                currPhase.setIePhasePosition(iePhasePositionArrayList);
             }
-
+            currPhase.setIePhasePosition(iePhasePositionArrayList);
             ps.close();
 
             // get phase Leader info

@@ -5,6 +5,7 @@ import client.ClientController;
 import client.ClientUI;
 import common.IcmUtils;
 import entities.ChangeRequest;
+import entities.IEPhasePosition;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -72,10 +73,6 @@ public class CrDetailsBase implements ClientUI {
 
         clientController.handleMessageFromClientUI(loadRequestData);
 
-        Button myBtn = new Button("test");
-        myBtn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        myBtn.styleProperty().setValue(downloadFilesButton.getStyle());
-        buttonsVBox.getChildren().add(myBtn);
     }
 
 
@@ -112,6 +109,24 @@ public class CrDetailsBase implements ClientUI {
                 requestedChangeTextField.textProperty().setValue(currRequest.getRequestedChange());
                 commentsTextArea.textProperty().setValue(currRequest.getComment());
                 phaseDeadLineTextField.setText(currRequest.getPhases().get(0).getDeadLine().toString());
+
+                List<IEPhasePosition> iePhasePositionList;
+                IEPhasePosition iePhasePosition;
+                iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
+                if(iePhasePositionList.isEmpty()) {
+                    System.out.println("not good");
+                    break;
+                }
+                iePhasePosition = iePhasePositionList.get(0);
+                switch (iePhasePosition.getPhasePosition()) {
+                    case EXECUTIVE_LEADER:
+                        Button myBtn = new Button("Set Decision");
+                        myBtn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                        myBtn.styleProperty().setValue(downloadFilesButton.getStyle());
+                        buttonsVBox.getChildren().add(myBtn);
+                        break;
+                }
+
                 break;
         }
     }
