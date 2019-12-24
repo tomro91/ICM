@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -102,18 +102,22 @@
                            </font>
                         </Button>
                         <MaterialDesignIconView glyphName="DOWNLOAD" layoutX="201.0" layoutY="177.0" size="20" />
-                        <Button fx:id="requestPhaseTimeButton" layoutX="7.0" layoutY="200.0" mnemonicParsing="false" onAction="#showRequestTimeDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Request Phase Time">
+                        <Button fx:id="requestPhaseTimeButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="200.0" mnemonicParsing="false" onAction="#showRequestTimeDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Request Phase Time">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <MaterialDesignIconView glyphName="ALARM" size="20" />
+                           </graphic>
                         </Button>
-                        <Button fx:id="createEvaluationReportButton" layoutX="7.0" layoutY="246.0" mnemonicParsing="false" onAction="#showCreateEvaluationReportDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Create Evaluation Report">
+                        <Button fx:id="createEvaluationReportButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="246.0" mnemonicParsing="false" onAction="#showCreateEvaluationReportDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Create Evaluation Report">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <MaterialDesignIconView glyphName="CONTENT_PASTE" size="17" />
+                           </graphic>
                         </Button>
-                        <MaterialDesignIconView glyphName="CONTENT_PASTE" layoutX="203.0" layoutY="268.0" size="17" />
-                        <MaterialDesignIconView glyphName="ALARM" layoutX="191.0" layoutY="224.0" size="20" />
                      </children>
                   </AnchorPane>
                </left>

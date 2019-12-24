@@ -111,7 +111,7 @@ public class IcmUtils {
 
             case Change_Request_Summary:
                 sceneTitle = "ICM Change Request Summary";
-                fxmlPath = "/client/crDetails/CrDetailsBase.fxml";
+                fxmlPath = "/client/crDetails/CrDetails.fxml";
                 width = 1000;
                 height = 650;
                 break;

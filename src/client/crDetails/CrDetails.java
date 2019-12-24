@@ -6,20 +6,18 @@ import client.ClientUI;
 import common.IcmUtils;
 import entities.ChangeRequest;
 import entities.IEPhasePosition;
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import server.ServerService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrDetailsBase implements ClientUI {
+public class CrDetails implements ClientUI {
 
     @FXML
     private TextField changeRequestIDTextField;
@@ -42,7 +40,7 @@ public class CrDetailsBase implements ClientUI {
     @FXML
     private TextField phaseDeadLineTextField;
     @FXML
-    private VBox buttonsVBox;
+    private Pane supervisorButtonsPane;
     @FXML
     private Button downloadFilesButton;
 
@@ -54,7 +52,7 @@ public class CrDetailsBase implements ClientUI {
     }
 
     public static void setCurrRequest(ChangeRequest currRequest) {
-        CrDetailsBase.currRequest = currRequest;
+        CrDetails.currRequest = currRequest;
     }
 
     public void initialize() {
@@ -110,23 +108,25 @@ public class CrDetailsBase implements ClientUI {
                 commentsTextArea.textProperty().setValue(currRequest.getComment());
                 phaseDeadLineTextField.setText(currRequest.getPhases().get(0).getDeadLine().toString());
 
-                List<IEPhasePosition> iePhasePositionList;
-                IEPhasePosition iePhasePosition;
-                iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
-                if(iePhasePositionList.isEmpty()) {
-                    System.out.println("not good");
-                    break;
-                }
-                iePhasePosition = iePhasePositionList.get(0);
-                switch (iePhasePosition.getPhasePosition()) {
-                    case EXECUTIVE_LEADER:
-                        Button myBtn = new Button("Set Decision");
-                        myBtn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                        myBtn.styleProperty().setValue(downloadFilesButton.getStyle());
-                        buttonsVBox.getChildren().add(myBtn);
-                        break;
-                }
+                initButtons();
 
+                break;
+        }
+    }
+
+    private void initButtons() {
+        List<IEPhasePosition> iePhasePositionList;
+        IEPhasePosition iePhasePosition;
+        iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
+
+        // the user does not have any special position in this request
+        if(iePhasePositionList.isEmpty())   return;
+
+        // load buttons based on user position
+        iePhasePosition = iePhasePositionList.get(0);
+        switch (iePhasePosition.getPhasePosition()) {
+            case EXECUTIVE_LEADER:
+                supervisorButtonsPane.setVisible(true);
                 break;
         }
     }

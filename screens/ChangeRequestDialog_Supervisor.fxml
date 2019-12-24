@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -122,16 +122,18 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="closeChangeRequestButton" layoutX="7.0" layoutY="401.0" mnemonicParsing="false" onAction="#closeChangeRequest" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Close Change Request">
+                        <Button fx:id="closeChangeRequestButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="401.0" mnemonicParsing="false" onAction="#closeChangeRequest" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Close Change Request">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="TIMES_CIRCLE_ALT" size="20" />
+                           </graphic>
                         </Button>
                         <MaterialDesignIconView glyphName="ALARM_CHECK" layoutX="191.0" layoutY="227.0" size="20" />
                         <MaterialDesignIconView glyphName="ACCOUNT_MULTIPLE_PLUS" layoutX="201.0" layoutY="273.0" size="20" />
                         <MaterialDesignIconView glyphName="ACCOUNT_PLUS" layoutX="192.0" layoutY="324.0" size="20" />
                         <FontAwesomeIconView glyphName="HAND_STOP_ALT" layoutX="174.0" layoutY="371.0" size="17" />
-                        <FontAwesomeIconView glyphName="TIMES_CIRCLE_ALT" layoutX="202.0" layoutY="424.0" size="20" />
                      </children>
                   </AnchorPane>
                </left>

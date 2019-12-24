@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -96,12 +96,14 @@
                               <Image url="@../logo6.PNG" />
                            </image>
                         </ImageView>
-                        <Button layoutX="7.0" layoutY="196.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Attach Files">
+                        <Button contentDisplay="RIGHT" layoutX="7.0" layoutY="196.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Attach Files">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView fx:id="attachFile" glyphName="PAPERCLIP" size="17" />
+                           </graphic>
                         </Button>
-                        <FontAwesomeIconView fx:id="attachFile" glyphName="PAPERCLIP" layoutX="165.0" layoutY="218.0" size="17" />
                         <Button alignment="TOP_CENTER" layoutX="7.0" layoutY="154.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Download Attached Files">
                            <font>
                               <Font size="14.0" />

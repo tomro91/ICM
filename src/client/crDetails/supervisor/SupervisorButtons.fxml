@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="482.0" prefWidth="235.0" spacing="15.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.crDetails.supervisor.SupervisorButtons">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <Button fx:id="phaseTimeDecisionButton" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setTimeDecision" prefHeight="35.0" style="-fx-background-radius: 10;" text="Phase Time Decision" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView glyphName="ALARM_CHECK" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="assignPhaseLeadersButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAssignPhaseLeadersDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Assign Phase Leaders">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView glyphName="ACCOUNT_MULTIPLE_PLUS" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="assignPhaseWorkersButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAssignPhaseWorkersDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Assign Phase workers">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView glyphName="ACCOUNT_PLUS" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="freezeRequestButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#freezeRequest" prefHeight="35.0" style="-fx-background-radius: 10;" text="Freeze Request">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="HAND_STOP_ALT" size="17" />
+         </graphic>
+      </Button>
+      <Button fx:id="closeChangeRequestButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#closeChangeRequest" prefHeight="35.0" style="-fx-background-radius: 10;" text="Close Change Request">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView glyphName="TIMES_CIRCLE_ALT" size="20" />
+         </graphic>
+      </Button>
+   </children>
+</VBox>

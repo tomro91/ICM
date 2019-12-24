@@ -2,7 +2,7 @@ package client.mainWindow;
 
 import client.ClientController;
 import client.ClientUI;
-import client.crDetails.CrDetailsBase;
+import client.crDetails.CrDetails;
 import common.IcmUtils;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entities.*;
@@ -121,7 +121,7 @@ public class MainWindow implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetailsBase.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
+                    CrDetails.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });
@@ -132,7 +132,7 @@ public class MainWindow implements ClientUI {
             TableRow<ChangeRequest> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetailsBase.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
+                    CrDetails.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
                     showRequestDialog();
                 }
             });

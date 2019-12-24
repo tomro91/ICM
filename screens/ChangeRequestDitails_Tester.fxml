@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -102,12 +102,14 @@
                            </font>
                         </Button>
                         <MaterialDesignIconView glyphName="DOWNLOAD" layoutX="201.0" layoutY="177.0" size="20" />
-                        <Button fx:id="setDecisionButton" layoutX="7.0" layoutY="201.0" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Set Decision" textAlignment="CENTER">
+                        <Button fx:id="setDecisionButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="201.0" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Set Decision" textAlignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="LIGHTBULB_ALT" size="20" />
+                           </graphic>
                         </Button>
-                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" layoutX="165.0" layoutY="224.0" size="20" />
                      </children>
                   </AnchorPane>
                </left>

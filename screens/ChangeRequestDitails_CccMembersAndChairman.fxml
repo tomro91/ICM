@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -97,30 +97,38 @@
                               <Image url="@../logo6.PNG" />
                            </image>
                         </ImageView>
-                        <Button alignment="TOP_CENTER" layoutX="7.0" layoutY="154.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Download Attached Files">
+                        <Button alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="7.0" layoutY="154.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Download Attached Files">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <MaterialDesignIconView glyphName="DOWNLOAD" size="20" />
+                           </graphic>
                         </Button>
-                        <MaterialDesignIconView glyphName="DOWNLOAD" layoutX="201.0" layoutY="177.0" size="20" />
-                        <Button fx:id="viewEvaluationReportButton" layoutX="7.0" layoutY="199.0" mnemonicParsing="false" onAction="#showEvaluationReport" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="View Evaluation Report" textAlignment="CENTER">
+                        <Button fx:id="viewEvaluationReportButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="199.0" mnemonicParsing="false" onAction="#showEvaluationReport" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="View Evaluation Report" textAlignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <OctIconView glyphName="CLIPPY" size="18" />
+                           </graphic>
                         </Button>
-                        <Button fx:id="setDecisionButton" layoutX="7.0" layoutY="243.0" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Set Decision">
+                        <Button fx:id="setDecisionButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="243.0" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Set Decision">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="LIGHTBULB_ALT" size="20" />
+                           </graphic>
                         </Button>
-                        <Button fx:id="assignTesterButton" layoutX="7.0" layoutY="288.0" mnemonicParsing="false" onAction="#showAssignTesterDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Assign Tester">
+                        <Button fx:id="assignTesterButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="288.0" mnemonicParsing="false" onAction="#showAssignTesterDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Assign Tester">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <MaterialDesignIconView glyphName="ACCOUNT_PLUS" size="20" />
+                           </graphic>
                         </Button>
-                        <OctIconView glyphName="CLIPPY" layoutX="203.0" layoutY="221.0" size="18" />
-                        <MaterialDesignIconView glyphName="ACCOUNT_PLUS" layoutX="170.0" layoutY="312.0" size="20" />
-                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" layoutX="174.0" layoutY="266.0" size="20" />
                      </children>
                   </AnchorPane>
                </left>

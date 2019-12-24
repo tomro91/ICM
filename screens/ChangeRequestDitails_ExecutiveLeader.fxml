@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: white;">
         <items>
@@ -102,18 +102,22 @@
                            </font>
                         </Button>
                         <MaterialDesignIconView glyphName="DOWNLOAD" layoutX="201.0" layoutY="177.0" size="20" />
-                        <Button fx:id="requestPhaseTimeButton" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="201.0" mnemonicParsing="false" onAction="#showRequestTimeDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Request Phase Time" textAlignment="CENTER">
+                        <Button fx:id="requestPhaseTimeButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="7.0" layoutY="201.0" mnemonicParsing="false" onAction="#showRequestTimeDialog" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Request Phase Time" textAlignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <MaterialDesignIconView glyphName="ALARM" size="20" />
+                           </graphic>
                         </Button>
-                        <Button fx:id="confirmExecutionButton" layoutX="7.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmExecution" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Confirm Execution">
+                        <Button fx:id="confirmExecutionButton" contentDisplay="RIGHT" layoutX="7.0" layoutY="253.0" mnemonicParsing="false" onAction="#confirmExecution" prefHeight="33.0" prefWidth="228.0" style="-fx-background-radius: 10;" text="Confirm Execution">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="CHECK" size="20" />
+                           </graphic>
                         </Button>
-                        <MaterialDesignIconView glyphName="ALARM" layoutX="190.0" layoutY="225.0" size="20" />
-                        <FontAwesomeIconView glyphName="CHECK" layoutX="185.0" layoutY="277.0" size="20" />
                      </children>
                   </AnchorPane>
                </left>
