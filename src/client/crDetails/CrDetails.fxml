@@ -111,27 +111,13 @@
             <Pane fx:id="initiatorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
                <fx:include source="initiator/InitiatorButtons.fxml" />
             </Pane>
-            <Pane fx:id="supervisorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false">
-               <fx:include source="supervisor/SupervisorButtons.fxml" />
-            </Pane>
-            <Pane fx:id="cccButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="ccc/CCCButtons.fxml" />
-            </Pane>
-            <Pane fx:id="evaluatorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="evaluator/EvaluatorButtons.fxml" />
-            </Pane>
-            <Pane fx:id="executiveLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="executiveLeader/ExecutiveLeaderButtons.fxml" />
-            </Pane>
-            <Pane fx:id="itdButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="itd/ITDButtons.fxml" />
-            </Pane>
-            <Pane fx:id="phaseLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="phaseLeader/PhaseLeaderButtons.fxml" />
-            </Pane>
-            <Pane fx:id="testerButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="tester/TesterButtons.fxml" />
-            </Pane>
+            <Pane fx:id="supervisorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false"/>
+            <Pane fx:id="cccButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="evaluatorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="executiveLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="itdButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="phaseLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="testerButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
          </children>
       </AnchorPane>
    </left>
