@@ -42,6 +42,21 @@ public class CrDetails implements ClientUI {
     @FXML
     private Pane supervisorButtonsPane;
     @FXML
+    private Pane initiatorButtonsPane;
+    @FXML
+    private Pane cccButtonsPane;
+    @FXML
+    private Pane evaluatorButtonsPane;
+    @FXML
+    private Pane executiveLeaderButtonsPane;
+    @FXML
+    private Pane itdButtonsPane;
+    @FXML
+    private Pane phaseLeaderButtonsPane;
+    @FXML
+    private Pane testerButtonsPane;
+
+    @FXML
     private Button downloadFilesButton;
 
     private static ChangeRequest currRequest;
@@ -120,7 +135,10 @@ public class CrDetails implements ClientUI {
         iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
 
         // the user does not have any special position in this request
-        if(iePhasePositionList.isEmpty())   return;
+        if(iePhasePositionList.isEmpty()){
+            initiatorButtonsPane.setVisible(true);
+            return;
+        }
 
         // load buttons based on user position
         iePhasePosition = iePhasePositionList.get(0);
@@ -128,6 +146,16 @@ public class CrDetails implements ClientUI {
             case EXECUTIVE_LEADER:
                 supervisorButtonsPane.setVisible(true);
                 break;
+            case EVALUATOR:
+                evaluatorButtonsPane.setVisible(true);
+                break;
+            case TESTER:
+                testerButtonsPane.setVisible(true);
+                break;
+            case PHASE_LEADER:
+                phaseLeaderButtonsPane.setVisible(true);
+                break;
         }
+
     }
 }
