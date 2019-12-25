@@ -29,6 +29,8 @@ public class MainWindow implements ClientUI {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Tab inMyTreatmentTab;
     // my change requests tab
     @FXML
     private TableView<ChangeRequest> myTableView;
@@ -186,7 +188,12 @@ public class MainWindow implements ClientUI {
         List<List<ChangeRequest>> allRequests = serverService.getParams();
         myRequests.setAll(allRequests.get(0));
         myTableView.setItems(myRequests);
-        inMyTreatmentRequests.setAll(allRequests.get(1));
-        workTableView.setItems(inMyTreatmentRequests);
+        if (ClientController.getUser().getTitle() != ChangeInitiator.Title.INFOENGINEER) {
+            inMyTreatmentTab.setDisable(true);
+        }
+        else {
+            inMyTreatmentRequests.setAll(allRequests.get(1));
+            workTableView.setItems(inMyTreatmentRequests);
+        }
     }
 }

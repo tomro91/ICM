@@ -68,7 +68,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab style="-fx-font-size: 15;" text="Change Request In My Treatment">
+                <Tab fx:id="inMyTreatmentTab" style="-fx-font-size: 15;" text="Change Request In My Treatment">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

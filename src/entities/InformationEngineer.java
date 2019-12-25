@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class InformationEngineer extends ChangeInitiator implements Serializable {
 
 	private InfoSystem managedSystem;
-	private Position position;
 
 	public InfoSystem getManagedSystem() {
 		return this.managedSystem;
@@ -19,18 +18,5 @@ public class InformationEngineer extends ChangeInitiator implements Serializable
 		this.managedSystem = managedSystem;
 	}
 
-	public Position getPosition() {
-		// TODO - implement InformationEngineer.getPosition
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param position
-	 */
-	public void setPosition(IEPhasePosition.PhasePosition position) {
-		// TODO - implement InformationEngineer.setPosition
-		throw new UnsupportedOperationException();
-	}
 
 }
