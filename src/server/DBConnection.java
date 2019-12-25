@@ -146,6 +146,20 @@ public class DBConnection {
         return allRequests;
     }
 
+    public void updateRequestDetails(List<String> requirementList) {
+        try {
+            // create and execute the query
+            PreparedStatement ps = sqlConnection.prepareStatement("UPDATE Requirement SET rStatus=? WHERE id=?");
+            ps.setString(1, requirementList.get(0));
+            ps.setInt(2, Integer.parseInt(requirementList.get(1)));
+            ps.executeUpdate();
+            System.out.println("status updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     // helper function for getAllRequests()
     private Set<ChangeRequest> insertRequestsIntoList(int userId) throws SQLException {
         ResultSet rs = ps.executeQuery();

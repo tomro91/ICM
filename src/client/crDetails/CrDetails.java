@@ -160,7 +160,6 @@ public class CrDetails implements ClientUI {
 
         if (root != null) {
             buttonsPane.getChildren().setAll(root);
-            return;
         }
 
         for (IEPhasePosition ie: iePhasePositionMap.values() ) {
