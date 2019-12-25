@@ -9,10 +9,12 @@ import client.ClientUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import server.ServerService;
 
 public class CreateEvaluationReport implements ClientUI {
@@ -26,7 +28,7 @@ public class CreateEvaluationReport implements ClientUI {
 	@FXML
 	private TextArea risksAndConstraintsTextArea;
 	@FXML
-	private DatePicker EvaluatedTimeDatePicker;
+	private TextField EvaluatedTimeDatePicker;
 	@FXML
 	private Button cancelButton;
 	@FXML
