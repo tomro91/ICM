@@ -24,8 +24,8 @@ public class CCCButtons implements ClientUI {
 
     @FXML
     private Button assignTesterButton;
-    
-    private ClientController clientController ;
+
+    private ClientController clientController;
 
     @FXML
     void showAssignTesterDialog(ActionEvent event) {
@@ -34,8 +34,8 @@ public class CCCButtons implements ClientUI {
 
     @FXML
     void showEvaluationReport(ActionEvent event) throws IOException {
-    	
-    	 IcmUtils.loadScene(this, IcmUtils.Scenes.Evaluation_Report);
+
+        IcmUtils.loadScene(this, IcmUtils.Scenes.Evaluation_Report);
 
     }
 
@@ -48,19 +48,17 @@ public class CCCButtons implements ClientUI {
     public void handleMessageFromClientController(ServerService serverService) {
 
     }
-<<<<<<< HEAD
 
     public void enableChairmanButtons() {
         setDecisionButton.setDisable(false);
         assignTesterButton.setDisable(false);
-=======
-    
+    }
+
     public void initialize() {
         try {
             clientController = ClientController.getInstance(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
->>>>>>> 8ee09d2babec685c4119430e6c09296f151fee51
     }
 }
