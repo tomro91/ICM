@@ -16,7 +16,7 @@
             <Font size="14.0" />
          </font>
          <graphic>
-            <FontAwesomeIconView fx:id="attachFile" glyphName="PAPERCLIP" size="17" />
+            <FontAwesomeIconView glyphName="PAPERCLIP" size="17" />
          </graphic>
       </Button>
    </children>
