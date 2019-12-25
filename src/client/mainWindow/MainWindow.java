@@ -92,9 +92,7 @@ public class MainWindow implements ClientUI {
         // show assign permissions and create report buttons only if the user is the ITD Manager
         if (currUser.getPosition() != Position.ITD_MANAGER) {
             itdManagerAssignPermissionsButton.setVisible(false);
-            itdManagerAssignPermissionsIcon.setVisible(false);
             createReportButton.setVisible(false);
-            createReportIcon.setVisible(false);
         }
 
         // init request lists

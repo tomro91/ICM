@@ -132,31 +132,25 @@ public class DBConnection {
             // create and execute the query
             // the user is the change initiator
             ps = sqlConnection.prepareStatement(
-                    "SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName, PH.phStatus, U.firstName, U.lastName " +
-                    "FROM changeRequest CR, phase PH, users U " +
-                    "WHERE CR.crIDuser = ? AND CR.crID = PH.phIDChangeRequest AND CR.crCurrPhaseName = PH.phPhaseName AND PH.phIDPhaseLeader = U.IDuser"
+                    "SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName " +
+                            "FROM changeRequest CR " +
+                            "WHERE CR.crIDuser = ?;"
             );
 
             // go throw the results and add it to arrayList
-            Set<ChangeRequest> tempSet = (Set<ChangeRequest>) insertRequestsIntoList(currUser.getId());
+            Set<ChangeRequest> tempSet = insertRequestsIntoList(currUser.getId());
             myRequests.addAll(tempSet);
             System.out.println("1 succeed");
 
-            // get requests where the user is the phase leader
-            ps = sqlConnection.prepareStatement(
-                    "SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName, PH.phStatus, U.firstName, U.lastName " +
-                    "FROM changeRequest CR, phase PH, users U " +
-                    "WHERE CR.crIDuser = ? AND CR.crID = PH.phIDChangeRequest AND CR.crCurrPhaseName = PH.phPhaseName AND PH.phIDPhaseLeader = U.IDuser"
-            );
-
             tempSet = new HashSet<>();
-            tempSet.addAll(insertRequestsIntoList(currUser.getId()));
 
             // get requests where the user has any position
             ps = sqlConnection.prepareStatement(
-                    "SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName, PH.phStatus, U.firstName, U.lastName " +
-                    "FROM changeRequest CR, phase PH, users U, ieInPhase IE " +
-                    "WHERE CR.crID = PH.phIDChangeRequest AND PH.phIDChangeRequest = IE.crID AND CR.crCurrPhaseName = PH.phPhaseName AND PH.phPhaseName = IE.iePhaseName AND IE.IDieInPhase = U.IDuser = ?"
+                    "SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName " +
+                            "FROM changeRequest CR, ieInPhase IE " +
+                            "WHERE CR.crID = IE.crID AND " +
+                                  "CR.crCurrPhaseName = IE.iePhaseName AND " +
+                                  "IE.IDieInPhase = ?"
             );
             tempSet.addAll(insertRequestsIntoList(currUser.getId()));
             inMyTreatmentRequests.addAll(tempSet);
@@ -179,12 +173,10 @@ public class DBConnection {
         rs.beforeFirst();
         while (rs.next()) {
             ChangeRequest row = new ChangeRequest();
-            row.setId(rs.getInt(1));
-            row.setInfoSystem(InfoSystem.valueOf(rs.getString(2)));
-            row.setDate(rs.getDate(3).toLocalDate());
-            row.setCurrPhaseName(Phase.PhaseName.valueOf(rs.getString(4)));
-            row.setCurrPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString(5)));
-            row.setCurrPhasePhaseLeaderName(rs.getString(6) + " " + rs.getString(7));
+            row.setId(rs.getInt("crID"));
+            row.setInfoSystem(InfoSystem.valueOf(rs.getString("crInfoSystem")));
+            row.setDate(rs.getDate("crDate").toLocalDate());
+            row.setCurrPhaseName(Phase.PhaseName.valueOf(rs.getString("crCurrPhaseName")));
             requestSet.add(row);
             System.out.println(row);
         }
@@ -201,7 +193,7 @@ public class DBConnection {
      */
     public List<ChangeRequest> getRequestDetails(List<Integer> params) {
         ChangeRequest cr = new ChangeRequest();
-        List<Phase> crPhases = new ArrayList<>();
+        List<Phase> crPhaseList = new ArrayList<>();
         List<ChangeRequest> crList = new ArrayList<>();
 
         try {
@@ -228,7 +220,7 @@ public class DBConnection {
 
             ps.close();
 
-            // get request phases
+            // get request current phase
             ps = sqlConnection.prepareStatement("SELECT * FROM phase WHERE phIDChangeRequest = ? AND phPhaseName = ?");
             ps.setInt(1, cr.getId());
             ps.setString(2, cr.getCurrPhaseName().toString());
@@ -238,12 +230,9 @@ public class DBConnection {
             rs.next();
 
             Phase currPhase = new Phase();
-            InformationEngineer phaseLeader = new InformationEngineer();
 
             currPhase.setChangeRequestId(cr.getId());
             currPhase.setName(cr.getCurrPhaseName());
-            currPhase.setLeader(phaseLeader);
-            phaseLeader.setId(rs.getInt("phIDPhaseLeader"));
             currPhase.setDeadLine(rs.getDate("phDeadLine").toLocalDate());
             currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
             currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
@@ -253,46 +242,35 @@ public class DBConnection {
                 currPhase.setExceptionTime(exceptionDate);
             }
 
-            crPhases.add(currPhase);
+            crPhaseList.add(currPhase);
             ps.close();
 
             // get Information Engineer Phase Position for the current user
-            ps = sqlConnection.prepareStatement("SELECT * FROM ieInPhase WHERE crID = ? AND iePhaseName = ? AND IDieInPhase = ?");
+            ps = sqlConnection.prepareStatement("SELECT * FROM ieInPhase WHERE crID = ? AND iePhaseName = ?");
             ps.setInt(1, cr.getId());
             ps.setString(2, cr.getCurrPhaseName().toString());
-            ps.setInt(3, params.get(0));
 
-            List<IEPhasePosition> iePhasePositionArrayList = new ArrayList<>();
+            Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePositionMap = new HashMap<>();
 
             rs = ps.executeQuery();
             rs.beforeFirst();
-            if(rs.next() != false) {
+            while (rs.next()) {
                 IEPhasePosition iePhasePosition = new IEPhasePosition();
                 iePhasePosition.setInformationEngineer(new InformationEngineer());
-                iePhasePosition.getInformationEngineer().setId(params.get(1));
+                iePhasePosition.getInformationEngineer().setId(rs.getInt("IDieInPhase"));
+                iePhasePosition.setCrID(params.get(1));
                 iePhasePosition.setPhaseName(currPhase.getName());
                 iePhasePosition.setPhasePosition(IEPhasePosition.PhasePosition.valueOf(rs.getString("iePhasePosition")));
 
-                iePhasePositionArrayList.add(iePhasePosition);
+                iePhasePositionMap.put(iePhasePosition.getPhasePosition(),iePhasePosition);
             }
-            currPhase.setIePhasePosition(iePhasePositionArrayList);
-            ps.close();
 
-            // get phase Leader info
-            ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");
-            ps.setInt(1, currPhase.getLeader().getId());
-            rs = ps.executeQuery();
-            rs.beforeFirst();
-            rs.next();
-
-            phaseLeader.setFirstName(rs.getString("firstName"));
-            phaseLeader.setLastName(rs.getString("lastName"));
-            phaseLeader.setEmail(rs.getString("email"));
-
-            cr.setPhases(crPhases);
-
+            currPhase.setIePhasePosition(iePhasePositionMap);
+            cr.setPhases(crPhaseList);
             crList.add(cr);
+
             ps.close();
+
 
             // get initiator details
             ps = sqlConnection.prepareStatement("SELECT * FROM users WHERE IDuser = ?");

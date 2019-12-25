@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import client.ClientController;
 import client.ClientUI;
+import client.crDetails.CrDetails;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

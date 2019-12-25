@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ChangeInitiator implements Serializable {
 
@@ -13,6 +14,15 @@ public class ChangeInitiator implements Serializable {
 	private CiDepartment department;
 	private String password;
 	private Position position;
+
+	public enum Title {
+		STUDENT,
+		LECTURER,
+		ADMINISTRATION,
+		INFOENGINEER
+	}
+
+
 
 	public String getFirstName() {
 		return this.firstName;
@@ -86,11 +96,16 @@ public class ChangeInitiator implements Serializable {
 		this.position = position;
 	}
 
-	public enum Title {
-		STUDENT,
-		LECTURER,
-		ADMINISTRATION,
-		INFOENGINEER
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ChangeInitiator initiator = (ChangeInitiator) o;
+		return Objects.equals(id, initiator.id);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

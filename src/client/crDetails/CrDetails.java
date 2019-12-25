@@ -3,9 +3,12 @@ package client.crDetails;
 
 import client.ClientController;
 import client.ClientUI;
+import client.crDetails.ccc.CCCButtons;
 import common.IcmUtils;
+import entities.ChangeInitiator;
 import entities.ChangeRequest;
 import entities.IEPhasePosition;
+import entities.InformationEngineer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +21,7 @@ import server.ServerService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CrDetails implements ClientUI {
 
@@ -42,21 +46,7 @@ public class CrDetails implements ClientUI {
     @FXML
     private TextField phaseDeadLineTextField;
     @FXML
-    private Pane supervisorButtonsPane;
-    @FXML
-    private Pane initiatorButtonsPane;
-    @FXML
-    private Pane cccButtonsPane;
-    @FXML
-    private Pane evaluatorButtonsPane;
-    @FXML
-    private Pane executiveLeaderButtonsPane;
-    @FXML
-    private Pane itdButtonsPane;
-    @FXML
-    private Pane phaseLeaderButtonsPane;
-    @FXML
-    private Pane testerButtonsPane;
+    private Pane buttonsPane;
 
     @FXML
     private Button downloadFilesButton;
@@ -136,34 +126,53 @@ public class CrDetails implements ClientUI {
     }
 
     private void initButtons() throws Exception{
-        List<IEPhasePosition> iePhasePositionList;
-        IEPhasePosition iePhasePosition;
-        iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
+        Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePositionMap;
+        iePhasePositionMap = currRequest.getPhases().get(0).getIePhasePosition();
+        ChangeInitiator currUser = ClientController.getUser();
+        Parent root = null;
 
-        // the user does not have any special position in this request
-        if(iePhasePositionList.isEmpty()){
-            initiatorButtonsPane.setVisible(true);
-            return;
+        switch (currUser.getPosition()) {
+            case ITD_MANAGER:
+                root = FXMLLoader.load(getClass().getResource("itd/ITDButtons.fxml"));
+                break;
+            case CCC:
+                root = FXMLLoader.load(getClass().getResource("ccc/CCCButtons.fxml"));
+                break;
+            case CHAIRMAN:
+                FXMLLoader loader = new FXMLLoader();
+                root = loader.load(getClass().getResource("ccc/CCCButtons.fxml").openStream());
+                CCCButtons chairman = loader.getController();
+                chairman.enableChairmanButtons();
+                break;
+            case SUPERVISOR:
+                root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
+                break;
+            default:
+                root = FXMLLoader.load(getClass().getResource("initiator/InitiatorButtons.fxml"));
         }
+        if (root != null)
+            buttonsPane.getChildren().setAll(root);
 
-        // load buttons based on user position
-        iePhasePosition = iePhasePositionList.get(0);
-        switch (iePhasePosition.getPhasePosition()) {
-            case EXECUTIVE_LEADER:
-                Parent root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
-                supervisorButtonsPane.getChildren().add(root);
-                supervisorButtonsPane.setVisible(true);
-                break;
-            case EVALUATOR:
-                evaluatorButtonsPane.setVisible(true);
-                break;
-            case TESTER:
-                testerButtonsPane.setVisible(true);
-                break;
-            case PHASE_LEADER:
-                phaseLeaderButtonsPane.setVisible(true);
-                break;
+        for (IEPhasePosition ie: iePhasePositionMap.values() ) {
+            if (ie.getInformationEngineer().getId().equals(currUser.getId())) {
+                switch (ie.getPhasePosition()) {
+                    case EXECUTIVE_LEADER:
+                        root = FXMLLoader.load(getClass().getResource("executiveLeader/ExecutiveLeaderButtons.fxml"));
+                        break;
+                    case EVALUATOR:
+                        root = FXMLLoader.load(getClass().getResource("evaluator/EvaluatorButtons.fxml"));
+                        break;
+                    case TESTER:
+                        root = FXMLLoader.load(getClass().getResource("tester/TesterButtons.fxml"));
+                        break;
+                    case PHASE_LEADER:
+                        root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
+                        break;
+
+                }
+            }
         }
-
+        if (root != null)
+            buttonsPane.getChildren().setAll(root);
     }
 }

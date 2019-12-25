@@ -3,17 +3,17 @@ package entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class Phase implements Serializable {
 
 	private PhaseName name;
-	private InformationEngineer leader;
 	private LocalDate deadLine;
 	private PhaseStatus phaseStatus;
 	private boolean extensionRequest;
 	private Integer changeRequestId;
 	private LocalDate exceptionTime;
-	private List<IEPhasePosition> iePhasePosition;
+	private Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePosition;
 
 	public enum PhaseName {
 		EVALUATION,
@@ -44,17 +44,6 @@ public class Phase implements Serializable {
 		this.name = name;
 	}
 
-	public InformationEngineer getLeader() {
-		return this.leader;
-	}
-
-	/**
-	 * 
-	 * @param leader
-	 */
-	public void setLeader(InformationEngineer leader) {
-		this.leader = leader;
-	}
 
 	public LocalDate getDeadLine() {
 		return this.deadLine;
@@ -113,11 +102,11 @@ public class Phase implements Serializable {
 		this.exceptionTime = exceptionTime;
 	}
 
-	public List<IEPhasePosition> getIePhasePosition() {
+	public Map<IEPhasePosition.PhasePosition, IEPhasePosition> getIePhasePosition() {
 		return iePhasePosition;
 	}
 
-	public void setIePhasePosition(List<IEPhasePosition> iePhasePosition) {
+	public void setIePhasePosition(Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePosition) {
 		this.iePhasePosition = iePhasePosition;
 	}
 

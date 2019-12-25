@@ -40,4 +40,9 @@ public class CCCButtons implements ClientUI {
     public void handleMessageFromClientController(ServerService serverService) {
 
     }
+
+    public void enableChairmanButtons() {
+        setDecisionButton.setDisable(false);
+        assignTesterButton.setDisable(false);
+    }
 }
