@@ -13,6 +13,8 @@ import server.ServerService;
 
 public class CCCButtons implements ClientUI {
 
+
+    // ccc buttons controller
     @FXML
     private VBox CCCButtonsVBox;
 
