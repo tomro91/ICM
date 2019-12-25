@@ -131,6 +131,12 @@ public class CrDetails implements ClientUI {
         ChangeInitiator currUser = ClientController.getUser();
         Parent root = null;
 
+        if (currUser.getTitle() != ChangeInitiator.Title.INFOENGINEER) {
+            root = FXMLLoader.load(getClass().getResource("initiator/InitiatorButtons.fxml"));
+            buttonsPane.getChildren().setAll(root);
+            return;
+        }
+
         switch (currUser.getPosition()) {
             case ITD_MANAGER:
                 root = FXMLLoader.load(getClass().getResource("itd/ITDButtons.fxml"));
@@ -147,11 +153,15 @@ public class CrDetails implements ClientUI {
             case SUPERVISOR:
                 root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
                 break;
-            default:
+            case REGULAR:
                 root = FXMLLoader.load(getClass().getResource("initiator/InitiatorButtons.fxml"));
+                break;
         }
-        if (root != null)
+
+        if (root != null) {
             buttonsPane.getChildren().setAll(root);
+            return;
+        }
 
         for (IEPhasePosition ie: iePhasePositionMap.values() ) {
             if (ie.getInformationEngineer().getId().equals(currUser.getId())) {

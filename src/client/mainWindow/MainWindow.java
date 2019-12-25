@@ -29,6 +29,8 @@ public class MainWindow implements ClientUI {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Tab inMyTreatmentTab;
     // my change requests tab
     @FXML
     private TableView<ChangeRequest> myTableView;
@@ -141,7 +143,7 @@ public class MainWindow implements ClientUI {
         // prepare service request to pass to server
         List<ChangeInitiator> userList = new ArrayList<>();
         userList.add(ClientController.getUser());
-        ServerService serverService = new ServerService(ServerService.DatabaseService.Get_All_Requests_New, userList);
+        ServerService serverService = new ServerService(ServerService.DatabaseService.Get_All_Requests, userList);
         // pass to client controller.
         // client controller uses 'handleMessageFromClientController' function to load server answer into the ui
         clientController.handleMessageFromClientUI(serverService);
@@ -186,7 +188,12 @@ public class MainWindow implements ClientUI {
         List<List<ChangeRequest>> allRequests = serverService.getParams();
         myRequests.setAll(allRequests.get(0));
         myTableView.setItems(myRequests);
-        inMyTreatmentRequests.setAll(allRequests.get(1));
-        workTableView.setItems(inMyTreatmentRequests);
+        if (ClientController.getUser().getTitle() != ChangeInitiator.Title.INFOENGINEER) {
+            inMyTreatmentTab.setDisable(true);
+        }
+        else {
+            inMyTreatmentRequests.setAll(allRequests.get(1));
+            workTableView.setItems(inMyTreatmentRequests);
+        }
     }
 }

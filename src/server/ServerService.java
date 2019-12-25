@@ -32,6 +32,7 @@ public class ServerService implements Serializable {
     public enum DatabaseService {
         Login,
         Get_All_Requests,
+<<<<<<< HEAD
         Get_All_Requests_New,
         Get_Request_Details,
         Update_Request_Status,
@@ -39,5 +40,8 @@ public class ServerService implements Serializable {
         Create_Evaluation_Report
         
 
+=======
+        Get_Request_Details
+>>>>>>> master
     }
 }
