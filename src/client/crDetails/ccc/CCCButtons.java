@@ -1,6 +1,10 @@
 package client.crDetails.ccc;
 
+import java.io.IOException;
+
+import client.ClientController;
 import client.ClientUI;
+import common.IcmUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +24,8 @@ public class CCCButtons implements ClientUI {
 
     @FXML
     private Button assignTesterButton;
+    
+    private ClientController clientController ;
 
     @FXML
     void showAssignTesterDialog(ActionEvent event) {
@@ -27,7 +33,9 @@ public class CCCButtons implements ClientUI {
     }
 
     @FXML
-    void showEvaluationReport(ActionEvent event) {
+    void showEvaluationReport(ActionEvent event) throws IOException {
+    	
+    	 IcmUtils.loadScene(this, IcmUtils.Scenes.Evaluation_Report);
 
     }
 
@@ -40,9 +48,19 @@ public class CCCButtons implements ClientUI {
     public void handleMessageFromClientController(ServerService serverService) {
 
     }
+<<<<<<< HEAD
 
     public void enableChairmanButtons() {
         setDecisionButton.setDisable(false);
         assignTesterButton.setDisable(false);
+=======
+    
+    public void initialize() {
+        try {
+            clientController = ClientController.getInstance(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+>>>>>>> 8ee09d2babec685c4119430e6c09296f151fee51
     }
 }

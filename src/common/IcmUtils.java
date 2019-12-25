@@ -16,7 +16,8 @@ public class IcmUtils {
         Main_Window,
         Login,
         Main_Window_New,
-        Change_Request_Summary
+        Change_Request_Summary,
+        Evaluation_Report
     }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -114,6 +115,12 @@ public class IcmUtils {
                 fxmlPath = "/client/crDetails/CrDetails.fxml";
                 width = 1000;
                 height = 650;
+                break;
+            case Evaluation_Report:
+                sceneTitle = "ICM View Evaluation Report";
+                fxmlPath = "/screens/CreateEvaluationReport/CreateEvaluationReport.fxml";
+                width = 600;
+                height = 632;
                 break;
             default:
                 throw new IOException();
