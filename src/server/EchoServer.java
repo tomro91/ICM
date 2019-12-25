@@ -124,6 +124,8 @@ public class EchoServer extends AbstractServer {
 
             case Submit_New_Request:
                 break;
+            case Create_Evaluation_Report:
+            	break;
 
 
         }

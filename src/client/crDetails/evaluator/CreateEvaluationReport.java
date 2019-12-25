@@ -50,7 +50,7 @@ public class CreateEvaluationReport implements ClientUI {
         ObservableList<String> obList = FXCollections.observableList(list);
         infoSystemChoiceBox.getItems().clear();
         infoSystemChoiceBox.setItems(obList);
-		
+        createButton.setDisable(true);
 	}
 
 	@Override
