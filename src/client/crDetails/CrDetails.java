@@ -166,7 +166,7 @@ public class CrDetails implements ClientUI {
                         root = FXMLLoader.load(getClass().getResource("tester/TesterButtons.fxml"));
                         break;
                     case PHASE_LEADER:
-                        root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("phaseLeader/PhaseLeaderButtons.fxml"));
                         break;
 
                 }

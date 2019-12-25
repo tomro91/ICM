@@ -103,14 +103,14 @@ public class MainWindow implements ClientUI {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         infoSystemColumn.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        currPhaseColumn.setCellValueFactory(new PropertyValueFactory<>("currPhase"));
+        currPhaseColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseName"));
         phaseStatusColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
         phaseLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
 
         idColumn1.setCellValueFactory(new PropertyValueFactory<>("id"));
         infoSystemColumn1.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
         dateColumn1.setCellValueFactory(new PropertyValueFactory<>("date"));
-        currPhaseColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhase"));
+        currPhaseColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseName"));
         phaseStatusColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
         phaseLeaderColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
 
