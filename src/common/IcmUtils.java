@@ -17,7 +17,8 @@ public class IcmUtils {
         Login,
         Main_Window_New,
         Change_Request_Summary,
-        Create_Evaluation_Report
+        Create_Evaluation_Report,
+        show_Request_Time_Dialog
     }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -119,7 +120,13 @@ public class IcmUtils {
                 
             case Create_Evaluation_Report:
                 sceneTitle = "ICM Create Evaluation Report";
-                fxmlPath = "/client/crDetails/evaluator/createEvaluationReport.fxml";
+                fxmlPath = "/C:/Users/Tom/Documents/GitHub/ICM/src/client/crDetails/evaluator/createEvaluationReport.fxml";
+                width = 600;
+                height = 632;
+                break;
+            case show_Request_Time_Dialog:
+            	sceneTitle = "ICM Create Evaluation Report";
+                fxmlPath = "/C:/Users/Tom/Documents/GitHub/ICM/src/client/crDetails/evaluator/createEvaluationReport.fxml";
                 width = 600;
                 height = 632;
                 break;

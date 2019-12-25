@@ -55,14 +55,15 @@ public class CreateEvaluationReport implements ClientUI {
         infoSystemChoiceBox.getItems().clear();
         infoSystemChoiceBox.setItems(obList);
         infoSystemChoiceBox.setValue("MOODLE");
-        createButton.setDisable(false);
+        
       
         
 	}
+	@FXML
 	public void create(ActionEvent e) {
 		System.out.println("pressed");
 	}
-	
+	@FXML
 	public void createEvaluaReport(ActionEvent e) {
 		boolean flag=true;
 		//checks if one or more fields are empty
