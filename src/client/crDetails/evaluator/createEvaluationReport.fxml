@@ -51,7 +51,7 @@
                </font>
             </Button>
             <ChoiceBox fx:id="infoSystemChoiceBox" layoutX="275.0" layoutY="190.0" prefHeight="25.0" prefWidth="257.0" style="-fx-background-radius: 10;" />
-            <Button fx:id="createButton" layoutX="451.0" layoutY="591.0" mnemonicParsing="false" onAction="#create" prefHeight="30.0" prefWidth="84.0" style="-fx-background-radius: 10; -fx-background-color: #418de4;" text="Create">
+            <Button fx:id="createButton" layoutX="451.0" layoutY="591.0" mnemonicParsing="false" onAction="#createEvaluationReport" prefHeight="30.0" prefWidth="84.0" style="-fx-background-radius: 10; -fx-background-color: #418de4;" text="Create">
                <font>
                   <Font size="15.0" />
                </font>

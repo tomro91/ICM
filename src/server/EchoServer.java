@@ -125,6 +125,9 @@ public class EchoServer extends AbstractServer {
             case Submit_New_Request:
                 break;
             case Create_Evaluation_Report:
+            	System.out.println("server handle create evaluation report");
+            	List<String>requirementList1=serverService.getParams();
+            	dbConnection.createEvaluationReport(requirementList1);
             	break;
 
 

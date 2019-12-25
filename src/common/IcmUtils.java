@@ -120,13 +120,13 @@ public class IcmUtils {
                 
             case Create_Evaluation_Report:
                 sceneTitle = "ICM Create Evaluation Report";
-                fxmlPath = "/C:/Users/Tom/Documents/GitHub/ICM/src/client/crDetails/evaluator/createEvaluationReport.fxml";
+                fxmlPath = "/client/crDetails/evaluator/createEvaluationReport.fxml";
                 width = 600;
                 height = 632;
                 break;
             case show_Request_Time_Dialog:
             	sceneTitle = "ICM Create Evaluation Report";
-                fxmlPath = "/C:/Users/Tom/Documents/GitHub/ICM/src/client/crDetails/evaluator/createEvaluationReport.fxml";
+                fxmlPath = "/client/crDetails/evaluator/createEvaluationReport.fxml";
                 width = 600;
                 height = 632;
                 break;

@@ -33,7 +33,7 @@ public class EvaluatorButtons implements ClientUI {
     @FXML
     public void showCreateEvaluationReportDialog(ActionEvent event) {
     	try {
-			IcmUtils.loadScene(this,Scenes.Create_Evaluation_Report);
+			IcmUtils.loadScene(this,IcmUtils.Scenes.Create_Evaluation_Report);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
