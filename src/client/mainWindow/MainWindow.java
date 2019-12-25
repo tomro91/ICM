@@ -143,7 +143,7 @@ public class MainWindow implements ClientUI {
         // prepare service request to pass to server
         List<ChangeInitiator> userList = new ArrayList<>();
         userList.add(ClientController.getUser());
-        ServerService serverService = new ServerService(ServerService.DatabaseService.Get_All_Requests_New, userList);
+        ServerService serverService = new ServerService(ServerService.DatabaseService.Get_All_Requests, userList);
         // pass to client controller.
         // client controller uses 'handleMessageFromClientController' function to load server answer into the ui
         clientController.handleMessageFromClientUI(serverService);

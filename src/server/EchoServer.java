@@ -4,7 +4,6 @@ package server;// This file contains material supporting section 3.7 of the text
 
 import entities.ChangeInitiator;
 import entities.ChangeRequest;
-import entities.Requirement;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -69,22 +68,6 @@ public class EchoServer extends AbstractServer {
                 break;
 
             case Get_All_Requests:
-                System.out.println("server handle Get_All_Requests");
-                // pass the request to the database
-                List<Requirement> requirements;
-                requirements = dbConnection.getAllRequestsFromRequirement();
-                serverService.setParams(requirements);
-                System.out.println(requirements);
-                try {
-                    // pass the result back to client controller
-                    client.sendToClient(serverService);
-                    System.out.println("sent back to client controller");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case Get_All_Requests_New:
                 System.out.println("server handle Get_All_Requests_New");
                 // pass the request to the database
                 List<List<ChangeRequest>> allRequests;
@@ -113,19 +96,6 @@ public class EchoServer extends AbstractServer {
                     e.printStackTrace();
                 }
                 break;
-
-            case Update_Request_Status:
-                System.out.println("server handle Update_Request_Status");
-                List<String> requirementList = serverService.getParams();
-                System.out.println(requirementList);
-                // pass the request to the database
-                dbConnection.updateRequestDetails(requirementList);
-                break;
-
-            case Submit_New_Request:
-                break;
-
-
         }
     }
 

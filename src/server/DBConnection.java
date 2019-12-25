@@ -39,49 +39,6 @@ public class DBConnection {
 
     }
 
-    public List<Requirement> getAllRequestsFromRequirement() {
-
-        List<Requirement> resultList = new ArrayList<>();
-        try {
-            // create and execute the query
-            PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM Requirement");
-            ResultSet resultSet = ps.executeQuery();
-
-            // go throw the results and add it to arrayList
-            resultSet.beforeFirst();
-            while (resultSet.next()) {
-                Requirement row = new Requirement();
-                row.setId(Integer.parseInt(resultSet.getString(1)));
-                row.setInitiatorName(resultSet.getString(2));
-                row.setInfoSystem(resultSet.getString(3));
-                row.setCurrState(resultSet.getString(4));
-                row.setRequestedChange(resultSet.getString(5));
-                row.setPhaseName(resultSet.getString(6));
-                row.setIeName(resultSet.getString(7));
-                resultList.add(row);
-                System.out.println(row);
-            }
-            ps.close();
-            System.out.println("getRequestFromRequirement succeed");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultList;
-    }
-
-    public void updateRequestDetails(List<String> requirementList) {
-        try {
-            // create and execute the query
-            PreparedStatement ps = sqlConnection.prepareStatement("UPDATE Requirement SET rStatus=? WHERE id=?");
-            ps.setString(1, requirementList.get(0));
-            ps.setInt(2, Integer.parseInt(requirementList.get(1)));
-            ps.executeUpdate();
-            System.out.println("status updated");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public List<ChangeInitiator> login(List<String> params) {
         System.out.println("database received login request for: " + params);
@@ -139,7 +96,7 @@ public class DBConnection {
                             "FROM changeRequest CR " +
                             "WHERE CR.crIDuser = ?;"
             );
-
+            ps.setInt(1, currUser.getId());
             // go throw the results and add it to arrayList
             Set<ChangeRequest> tempSet = insertRequestsIntoList(currUser.getId());
             myRequests.addAll(tempSet);
@@ -173,6 +130,7 @@ public class DBConnection {
                                     "WHERE CR.crID = IE.crID AND " +
                                     "CR.crCurrPhaseName = IE.iePhaseName AND " +
                                     "IE.IDieInPhase = ?");
+                    ps.setInt(1, currUser.getId());
                     break;
             }
 
@@ -190,7 +148,6 @@ public class DBConnection {
 
     // helper function for getAllRequests()
     private Set<ChangeRequest> insertRequestsIntoList(int userId) throws SQLException {
-        ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
 
         Set<ChangeRequest> requestSet = new HashSet<>();
