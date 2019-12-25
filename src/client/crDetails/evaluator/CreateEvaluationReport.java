@@ -59,6 +59,10 @@ public class CreateEvaluationReport implements ClientUI {
       
         
 	}
+	public void create(ActionEvent e) {
+		System.out.println("pressed");
+	}
+	
 	public void createEvaluaReport(ActionEvent e) {
 		boolean flag=true;
 		//checks if one or more fields are empty
