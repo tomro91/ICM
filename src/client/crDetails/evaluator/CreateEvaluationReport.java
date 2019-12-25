@@ -1,11 +1,13 @@
 package client.crDetails.evaluator;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientController;
 import client.ClientUI;
+import common.IcmUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,7 +54,36 @@ public class CreateEvaluationReport implements ClientUI {
         ObservableList<String> obList = FXCollections.observableList(list);
         infoSystemChoiceBox.getItems().clear();
         infoSystemChoiceBox.setItems(obList);
-        createButton.setDisable(true);
+        infoSystemChoiceBox.setValue("MOODLE");
+        createButton.setDisable(false);
+      
+        
+	}
+	public void createEvaluaReport(ActionEvent e) {
+		boolean flag=true;
+		//checks if one or more fields are empty
+		if(requiredChangeTextArea.getText()==null) {
+			requiredChangeTextArea.setText("required change text area is empty!!!");
+			flag=false;
+		}
+		if(expectedResultTextArea.getText()==null) {
+			expectedResultTextArea.setText("expected result text area is empty!!!");
+			flag=false;
+		}
+		if(risksAndConstraintsTextArea.getText()==null) {
+			risksAndConstraintsTextArea.setText("risks and constraints text area is empty!!!");
+			flag=false;
+		}
+		if(EvaluatedTimeDatePicker.getText()==null) {
+			EvaluatedTimeDatePicker.setText("evaluated time text field is empty!!!");
+			flag=false;
+		}
+		//if all the fields are full then save to db the report
+		if(flag==true) {
+			
+		}
+		else
+			IcmUtils.displayErrorMsg("one or more fields are empty");
 	}
 
 	@Override
