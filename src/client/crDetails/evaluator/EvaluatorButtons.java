@@ -1,6 +1,7 @@
 package client.crDetails.evaluator;
 
 import client.ClientUI;
+import client.crDetails.CrDetails;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

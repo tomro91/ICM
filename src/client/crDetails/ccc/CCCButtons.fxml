@@ -21,7 +21,7 @@
             <OctIconView glyphName="CLIPPY" size="18" />
          </graphic>
       </Button>
-      <Button fx:id="setDecisionButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Set Decision">
+      <Button fx:id="setDecisionButton" contentDisplay="RIGHT" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showSetDecisionDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Set Decision">
          <font>
             <Font size="14.0" />
          </font>
@@ -29,7 +29,7 @@
             <FontAwesomeIconView glyphName="LIGHTBULB_ALT" size="20" />
          </graphic>
       </Button>
-      <Button fx:id="assignTesterButton" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAssignTesterDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Assign Tester">
+      <Button fx:id="assignTesterButton" contentDisplay="RIGHT" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAssignTesterDialog" prefHeight="35.0" style="-fx-background-radius: 10;" text="Assign Tester">
          <font>
             <Font size="14.0" />
          </font>

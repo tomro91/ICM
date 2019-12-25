@@ -1,9 +1,11 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class IEPhasePosition implements Serializable {
 
+	private Integer crID;
 	private InformationEngineer informationEngineer;
 	private Phase.PhaseName phaseName;
 	private PhasePosition phasePosition;
@@ -13,6 +15,15 @@ public class IEPhasePosition implements Serializable {
 		EXECUTIVE_LEADER,
 		TESTER,
 		PHASE_LEADER
+	}
+
+
+	public Integer getCrID() {
+		return crID;
+	}
+
+	public void setCrID(Integer crID) {
+		this.crID = crID;
 	}
 
 	public InformationEngineer getInformationEngineer() {
@@ -52,6 +63,13 @@ public class IEPhasePosition implements Serializable {
 	}
 
 
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
 
-
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

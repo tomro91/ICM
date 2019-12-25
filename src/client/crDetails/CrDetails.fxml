@@ -108,16 +108,7 @@
                   <MaterialDesignIconView glyphName="DOWNLOAD" size="20" />
                </graphic>
             </Button>
-            <Pane fx:id="initiatorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" >
-               <fx:include source="initiator/InitiatorButtons.fxml" />
-            </Pane>
-            <Pane fx:id="supervisorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false"/>
-            <Pane fx:id="cccButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
-            <Pane fx:id="evaluatorButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
-            <Pane fx:id="executiveLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
-            <Pane fx:id="itdButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
-            <Pane fx:id="phaseLeaderButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
-            <Pane fx:id="testerButtonsPane" layoutX="5.0" layoutY="178.0" visible="false" />
+            <Pane fx:id="buttonsPane" layoutX="5.0" layoutY="178.0" />
          </children>
       </AnchorPane>
    </left>
