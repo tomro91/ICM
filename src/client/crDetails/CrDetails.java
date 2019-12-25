@@ -7,6 +7,8 @@ import common.IcmUtils;
 import entities.ChangeRequest;
 import entities.IEPhasePosition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -123,13 +125,17 @@ public class CrDetails implements ClientUI {
                 commentsTextArea.textProperty().setValue(currRequest.getComment());
                 phaseDeadLineTextField.setText(currRequest.getPhases().get(0).getDeadLine().toString());
 
-                initButtons();
+                try {
+                    initButtons();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 break;
         }
     }
 
-    private void initButtons() {
+    private void initButtons() throws Exception{
         List<IEPhasePosition> iePhasePositionList;
         IEPhasePosition iePhasePosition;
         iePhasePositionList = currRequest.getPhases().get(0).getIePhasePosition();
@@ -144,6 +150,8 @@ public class CrDetails implements ClientUI {
         iePhasePosition = iePhasePositionList.get(0);
         switch (iePhasePosition.getPhasePosition()) {
             case EXECUTIVE_LEADER:
+                Parent root = FXMLLoader.load(getClass().getResource("supervisor/SupervisorButtons.fxml"));
+                supervisorButtonsPane.getChildren().add(root);
                 supervisorButtonsPane.setVisible(true);
                 break;
             case EVALUATOR:
