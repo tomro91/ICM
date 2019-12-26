@@ -18,9 +18,10 @@ public class IcmUtils {
         Main_Window_New,
         Change_Request_Summary,
         Create_Evaluation_Report,
-        show_Request_Time_Dialog
-        Itd_Create_Report
-    }
+        show_Request_Time_Dialog,
+        Itd_Create_Report,
+      
+        }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -130,6 +131,7 @@ public class IcmUtils {
                 fxmlPath = "/client/crDetails/evaluator/TimeRequest.fxml";
                 width = 600;
                 height = 632;
+                
             case Itd_Create_Report:
                 sceneTitle = "Create Reports";
                 fxmlPath = "/client/crDetails/CrDetails.fxml";
