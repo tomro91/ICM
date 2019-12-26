@@ -6,6 +6,7 @@ import entities.ChangeInitiator;
 import entities.ChangeRequest;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
+import server.ServerService.DatabaseService;
 
 import java.io.IOException;
 import java.util.List;
@@ -96,27 +97,12 @@ public class EchoServer extends AbstractServer {
                     e.printStackTrace();
                 }
                 break;
-<<<<<<< HEAD
-
-            case Update_Request_Status:
-                System.out.println("server handle Update_Request_Status");
-                List<String> requirementList = serverService.getParams();
-                System.out.println(requirementList);
-                // pass the request to the database
-                dbConnection.updateRequestDetails(requirementList);
-                break;
-
-            case Submit_New_Request:
-                break;
-            case Create_Evaluation_Report:
+           case Create_Evaluation_Report:
             	System.out.println("server handle create evaluation report");
             	List<String>requirementList1=serverService.getParams();
-            	dbConnection.createEvaluationReport(requirementList1);
+            	List<Boolean>list=dbConnection.createEvaluationReport(requirementList1);
+            	ServerService s=new ServerService(DatabaseService.Create_Evaluation_Report, list);
             	break;
-
-
-=======
->>>>>>> master
         }
     }
 

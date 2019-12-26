@@ -115,7 +115,11 @@ public class CreateEvaluationReport implements ClientUI {
 	}
 	@Override
 	public void handleMessageFromClientController(ServerService serverService) {
-		// TODO Auto-generated method stub
+		List<Boolean>list=serverService.getParams();
+		if(list.get(0)==true)
+			IcmUtils.displayConfirmationMsg("creating evaluation report success");
+		else
+			IcmUtils.displayErrorMsg("creating evaluation report failed!!");
 		
 	}
 }
