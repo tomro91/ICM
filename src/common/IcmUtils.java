@@ -15,11 +15,13 @@ public class IcmUtils {
     public enum Scenes {
         Main_Window,
         Login,
+        Forgot_Password,
         Main_Window_New,
         Change_Request_Summary,
         Create_Evaluation_Report,
         show_Request_Time_Dialog,
         Itd_Create_Report,
+        
       
         }
 
@@ -100,6 +102,12 @@ public class IcmUtils {
                 width = 500;
                 height = 410;
                 break;
+            case Forgot_Password:
+            	 sceneTitle = "ICM - Forgot password";
+                 fxmlPath = "/client/login/ForgotPassword.fxml";
+                 width = 500;
+                 height = 410;
+                 break;
             case Main_Window:
                 sceneTitle = "ICM Main Window";
                 fxmlPath = "/client/mainWindow/MainWindowUI.fxml";

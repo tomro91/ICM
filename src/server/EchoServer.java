@@ -12,8 +12,13 @@ import server.ServerService.DatabaseService;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.*;
+
+
 import client.ClientController;
 import client.ClientUI;
+import common.IcmUtils;
+import common.JavaEmail;
 
 /**
  * This class overrides some of the methods in the abstract superclass in order
@@ -70,6 +75,25 @@ public class EchoServer extends AbstractServer {
 			}
 
 			break;
+		case Forgot_Password:
+			System.out.println("server handle forgot password request");
+			List<Object>l=dbConnection.forgotPasswordRequest(serverService.getParams());
+			if((Boolean)l.get(0)==false)
+				IcmUtils.displayErrorMsg("there is no such email in the system");
+			else
+			{
+				String text="hey "+(String)l.get(2)+"\n your id: "+(int)l.get(1)+"\n your password is: "+(String)l.get(3);
+				JavaEmail emailer=new JavaEmail();
+				 emailer.setMailServerProperties();
+				
+				try {
+					emailer.sendEmail((String)l.get(4), "restore password", text);
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 
 		case Get_All_Requests:
 			System.out.println("server handle Get_All_Requests_New");

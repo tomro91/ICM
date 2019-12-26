@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="C:/Users/Tom/Documents/GitHub/ICM/fontawesomefx-8.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Tom/Documents/GitHub/ICM/jfoenix-8.0.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Tom/Documents/GitHub/ICM/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tom/Desktop/jar_files/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tom/Desktop/jar_files/javax.mail-1.6.1.jar"/>
 	<classpathentry kind="output" path="out/production/ICMprototype"/>
 </classpath>
