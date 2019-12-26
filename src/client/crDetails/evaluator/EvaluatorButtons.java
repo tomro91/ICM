@@ -33,27 +33,31 @@ public class EvaluatorButtons implements ClientUI {
 
 	@FXML
 	public void showCreateEvaluationReportDialog(ActionEvent event) {
-		
-		if (CrDetails.getCurrRequest().getPhases().get(0).getPhaseStatus()==entities.Phase.PhaseStatus.TIME_APPROVED) {
+		if (CrDetails.getCurrRequest().isSuspended())
+			IcmUtils.displayErrorMsg("request is thaw");
+		else if (CrDetails.getCurrRequest().getPhases().get(0)
+				.getPhaseStatus() == entities.Phase.PhaseStatus.TIME_APPROVED) {
 			try {
 				IcmUtils.loadScene(this, IcmUtils.Scenes.Create_Evaluation_Report);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		else {
+		} else {
 			IcmUtils.displayErrorMsg("time of phase yet not approved");
 		}
 	}
 
 	@FXML
 	public void showRequestTimeDialog(ActionEvent event) {
-		try {
-			IcmUtils.loadScene(this, IcmUtils.Scenes.show_Request_Time_Dialog);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (CrDetails.getCurrRequest().isSuspended())
+			IcmUtils.displayErrorMsg("request is thaw");
+		else {
+			try {
+				IcmUtils.loadScene(this, IcmUtils.Scenes.show_Request_Time_Dialog);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	@Override
