@@ -19,6 +19,7 @@ public class IcmUtils {
         Change_Request_Summary,
         Create_Evaluation_Report,
         show_Request_Time_Dialog
+        Itd_Create_Report
     }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -129,6 +130,11 @@ public class IcmUtils {
                 fxmlPath = "/client/crDetails/evaluator/TimeRequest.fxml";
                 width = 600;
                 height = 632;
+            case Itd_Create_Report:
+                sceneTitle = "Create Reports";
+                fxmlPath = "/client/crDetails/CrDetails.fxml";
+                width = 1000;
+                height = 650;
                 break;
             default:
                 throw new IOException();
