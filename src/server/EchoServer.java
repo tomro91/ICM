@@ -120,6 +120,18 @@ public class EchoServer extends AbstractServer {
 			// pass the request to the database
 			dbConnection.updateRequestDetails(requirementList);
 			break;
+		case Request_Time_Evaluation:
+			System.out.println("server handle request time for evaluation phase");
+			List<Object>requestTimeDetails=serverService.getParams();
+			List<Boolean>list2=dbConnection.requestTimeEvaluation(requestTimeDetails);
+			ServerService s1= new ServerService(DatabaseService.Request_Time_Evaluation, list2);
+			try {
+				client.sendToClient(s1);
+				System.out.println("request time evaluation status sent to client");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		}
 	}
 

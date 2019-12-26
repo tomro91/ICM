@@ -330,4 +330,21 @@ public class DBConnection {
 	
 	}
 
+
+	public List<Boolean> requestTimeEvaluation(List<Object> requestTimeDetails) {
+		List<Boolean>list=new ArrayList<Boolean>();
+		try {
+			PreparedStatement ps=sqlConnection.prepareStatement("UPDATE phase SET phDeadline = ? ,phStatus=\"TIME_REQUESTED\" WHERE crID = ?");
+			ps.setInt(1, (int)requestTimeDetails.get(0));
+			ps.setDate(2, (Date) requestTimeDetails.get(1));
+			ps.executeUpdate();
+			list.add(true);
+			
+		} catch (SQLException e) {
+			list.add(false);
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

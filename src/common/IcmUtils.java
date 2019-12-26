@@ -125,8 +125,8 @@ public class IcmUtils {
                 height = 632;
                 break;
             case show_Request_Time_Dialog:
-            	sceneTitle = "ICM Create Evaluation Report";
-                fxmlPath = "/client/crDetails/evaluator/createEvaluationReport.fxml";
+            	sceneTitle = "ICM request time dialog";
+                fxmlPath = "/client/crDetails/evaluator/TimeRequest.fxml";
                 width = 600;
                 height = 632;
                 break;

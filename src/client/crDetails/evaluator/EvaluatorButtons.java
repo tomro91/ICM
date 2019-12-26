@@ -25,6 +25,7 @@ public class EvaluatorButtons implements ClientUI {
     public void initialize() {
     	try {
 			clientController=ClientController.getInstance(this);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,7 +42,11 @@ public class EvaluatorButtons implements ClientUI {
 
     @FXML
     public void showRequestTimeDialog(ActionEvent event) {
-    	
+    	try {
+			IcmUtils.loadScene(this, IcmUtils.Scenes.show_Request_Time_Dialog);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
     }
 
