@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DBConnection {
@@ -288,5 +289,45 @@ public class DBConnection {
         }
         return crList;
     }
+
+
+	public List<Boolean> createEvaluationReport(List<String> requirementList1) {
+		boolean flag=false;
+		List<Boolean>l=new ArrayList<Boolean>();
+		//insert new evaluation report to db
+		try {
+			System.out.println("insert new evaluation report");
+			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO evaluationReport(crID,infoSystem,requestedChange,expectedResult,risksAndConstraints,EvaluatedTime) VALUES(?,?,?,?,?,?)");
+			ps.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps.setString(2, requirementList1.get(1));
+			ps.setString(3, requirementList1.get(2));
+			ps.setString(4, requirementList1.get(3));
+			ps.setString(5, requirementList1.get(4));
+			ps.setDate(6, Date.valueOf(requirementList1.get(5)));
+			ps.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		//update phase of specific request to examination
+		try {
+			System.out.println("update current phase of request to examination");
+			PreparedStatement ps1=sqlConnection.prepareStatement("UPDATE changeRequest SET crCurrPhaseName = 'EXAMINATION' WHERE crID = ?");
+			ps1.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps1.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		return l;
+	
+	}
 
 }
