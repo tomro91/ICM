@@ -57,8 +57,8 @@ public class CreateEvaluationReport implements ClientUI {
         ObservableList<String> obList = FXCollections.observableList(list);
         infoSystemChoiceBox.getItems().clear();
         infoSystemChoiceBox.setItems(obList);
-        infoSystemChoiceBox.setValue("MOODLE");
-        
+        infoSystemChoiceBox.setValue(CrDetails.getCurrRequest().getInfoSystem().toString()); 
+        infoSystemChoiceBox.setDisable(true);
       
         
 	}
@@ -88,7 +88,7 @@ public class CreateEvaluationReport implements ClientUI {
 			List<String> l=new ArrayList<String>();
 			temp+=""+CrDetails.getCurrRequest().getId();
 			l.add(temp);
-			l.add(infoSystemChoiceBox.getValue());
+			l.add(CrDetails.getCurrRequest().getInfoSystem().toString());
 			l.add( requiredChangeTextArea.getText());
 			l.add(expectedResultTextArea.getText());
 			l.add( risksAndConstraintsTextArea.getText());
@@ -116,7 +116,7 @@ public class CreateEvaluationReport implements ClientUI {
 	@Override
 	public void handleMessageFromClientController(ServerService serverService) {
 		List<Boolean>list=serverService.getParams();
-		if(list.get(0)==true)
+		if(list.get(0)==true&&list.get(1)==true)
 			IcmUtils.displayConfirmationMsg("creating evaluation report success");
 		else
 			IcmUtils.displayErrorMsg("creating evaluation report failed!!");
