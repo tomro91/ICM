@@ -12,6 +12,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import client.crDetails.CrDetails;
+
 public class DBConnection {
 
     private Connection sqlConnection;
@@ -297,7 +299,7 @@ public class DBConnection {
 		//insert new evaluation report to db
 		try {
 			System.out.println("insert new evaluation report");
-			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO evaluationReport(crID,infoSystem,requestedChange,expectedResult,risksAndConstraints,EvaluatedTime) VALUES(?,?,?,?,?,?)");
+			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO evaluationReport(cRequestID,infoSystem,requestedChange,expectedResult,risksAndConstraints,EvaluatedTime) VALUES(?,?,?,?,?,?)");
 			ps.setInt(1, Integer.parseInt(requirementList1.get(0)));
 			ps.setString(2, requirementList1.get(1));
 			ps.setString(3, requirementList1.get(2));
@@ -313,7 +315,7 @@ public class DBConnection {
 			l.add(flag);
 			e.printStackTrace();
 		}
-		//update phase of specific request to examination
+		//update phase of specific request to examination in change request table
 		try {
 			System.out.println("update current phase of request to examination");
 			PreparedStatement ps1=sqlConnection.prepareStatement("UPDATE changeRequest SET crCurrPhaseName = 'EXAMINATION' WHERE crID = ?");
@@ -326,6 +328,33 @@ public class DBConnection {
 			l.add(flag);
 			e.printStackTrace();
 		}
+		//update evaluation phase of specific request status to done
+		try {
+			PreparedStatement ps1=sqlConnection.prepareStatement("UPDATE phase SET phStatus = 'DONE' WHERE phIDChangeRequest = ?");
+			ps1.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps1.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		//insert examination phase to specific request with status phase leader assigned
+		try {
+			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO phase VALUES(?,'EXAMINATION',?,'PHASE_LEADER_ASSIGNED',0,null)");
+			ps.setInt(1, Integer.parseInt(requirementList1.get(0)));//id
+			LocalDate newDate=CrDetails.getCurrRequest().getPhases().get(0).getDeadLine().plusDays(7);
+			ps.setDate(2, Date.valueOf(newDate));
+			ps.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
 		return l;
 	
 	}
@@ -334,13 +363,14 @@ public class DBConnection {
 	public List<Boolean> requestTimeEvaluation(List<Object> requestTimeDetails) {
 		List<Boolean>list=new ArrayList<Boolean>();
 		try {
-			PreparedStatement ps=sqlConnection.prepareStatement("UPDATE phase SET phDeadline = ? ,phStatus=\"TIME_REQUESTED\" WHERE crID = ?");
-			ps.setInt(1, (int)requestTimeDetails.get(0));
-			ps.setDate(2, (Date) requestTimeDetails.get(1));
+			PreparedStatement ps=sqlConnection.prepareStatement("UPDATE cbaricmy_ICM.phase SET phDeadline = ? ,phStatus='TIME_REQUESTED' WHERE phIDChangeRequest =?");
+			ps.setInt(2, (int)requestTimeDetails.get(0));
+			ps.setDate(1, Date.valueOf((LocalDate) requestTimeDetails.get(1)));
 			ps.executeUpdate();
 			list.add(true);
 			
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 			list.add(false);
 			e.printStackTrace();
 		}

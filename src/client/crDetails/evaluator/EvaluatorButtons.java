@@ -14,44 +14,50 @@ import server.ServerService;
 
 public class EvaluatorButtons implements ClientUI {
 
-    @FXML
-    private Button requestPhaseTimeButton;
+	@FXML
+	private Button requestPhaseTimeButton;
 
-    @FXML
-    private Button createEvaluationReportButton;
-    
-    private ClientController clientController;
-    
-    public void initialize() {
-    	try {
-			clientController=ClientController.getInstance(this);
-			
+	@FXML
+	private Button createEvaluationReportButton;
+
+	private ClientController clientController;
+
+	public void initialize() {
+		try {
+			clientController = ClientController.getInstance(this);
+			System.out.println(CrDetails.getCurrRequest().getPhases().get(0).getPhaseStatus());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
+	}
 
-    @FXML
-    public void showCreateEvaluationReportDialog(ActionEvent event) {
-    	try {
-			IcmUtils.loadScene(this,IcmUtils.Scenes.Create_Evaluation_Report);
-		} catch (IOException e) {
-			e.printStackTrace();
+	@FXML
+	public void showCreateEvaluationReportDialog(ActionEvent event) {
+		
+		if (CrDetails.getCurrRequest().getPhases().get(0).getPhaseStatus()==entities.Phase.PhaseStatus.TIME_APPROVED) {
+			try {
+				IcmUtils.loadScene(this, IcmUtils.Scenes.Create_Evaluation_Report);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-    }
+		else {
+			IcmUtils.displayErrorMsg("time of phase yet not approved");
+		}
+	}
 
-    @FXML
-    public void showRequestTimeDialog(ActionEvent event) {
-    	try {
+	@FXML
+	public void showRequestTimeDialog(ActionEvent event) {
+		try {
 			IcmUtils.loadScene(this, IcmUtils.Scenes.show_Request_Time_Dialog);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-    }
+	}
 
-    @Override
-    public void handleMessageFromClientController(ServerService serverService) {
+	@Override
+	public void handleMessageFromClientController(ServerService serverService) {
 
-    }
+	}
 }
