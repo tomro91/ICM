@@ -39,5 +39,7 @@ public class ServerService implements Serializable {
         Create_Evaluation_Report
         
 
+        Get_Request_Details,
+        Update_Request_Status
     }
 }

@@ -103,6 +103,14 @@ public class EchoServer extends AbstractServer {
             	List<Boolean>list=dbConnection.createEvaluationReport(requirementList1);
             	ServerService s=new ServerService(DatabaseService.Create_Evaluation_Report, list);
             	break;
+
+            case Update_Request_Status:
+                System.out.println("server handle Update_Request_Status");
+                List<String> requirementList = serverService.getParams();
+                System.out.println(requirementList);
+                // pass the request to the database
+                dbConnection.updateRequestDetails(requirementList);
+                break;
         }
     }
 
