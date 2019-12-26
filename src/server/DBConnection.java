@@ -384,8 +384,9 @@ public class DBConnection {
 			PreparedStatement ps=sqlConnection.prepareStatement("SELECT IDuser,firstName,password FROM cbaricmy_ICM.users where email=?");
 			ps.setString(1, params.get(0));
 			ResultSet rs=ps.executeQuery();
-			l.add(true);
+			
 			if(rs.next()) {
+				l.add(true);
 				l.add(rs.getInt("IDUser"));
 				l.add(rs.getString("firstName"));
 				l.add(rs.getString("password"));
@@ -393,7 +394,10 @@ public class DBConnection {
 			}
 			else
 				l.add(false);
-		} catch (SQLException e) {
+					
+		} 
+		catch (SQLException e) {
+			
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}

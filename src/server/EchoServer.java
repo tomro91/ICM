@@ -79,7 +79,11 @@ public class EchoServer extends AbstractServer {
 			System.out.println("server handle forgot password request");
 			List<Object>l=dbConnection.forgotPasswordRequest(serverService.getParams());
 			if((Boolean)l.get(0)==false)
-				IcmUtils.displayErrorMsg("there is no such email in the system");
+				try {
+					client.sendToClient(new ServerService(DatabaseService.Forgot_Password, l));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			else
 			{
 				String text="hey "+(String)l.get(2)+"\n your id: "+(int)l.get(1)+"\n your password is: "+(String)l.get(3);
@@ -88,6 +92,12 @@ public class EchoServer extends AbstractServer {
 				
 				try {
 					emailer.sendEmail((String)l.get(4), "restore password", text);
+					try {
+						client.sendToClient(new ServerService(DatabaseService.Forgot_Password, l));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

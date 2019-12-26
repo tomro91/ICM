@@ -54,7 +54,10 @@ public class ForgotPassword implements ClientUI {
 	}
 	@Override
 	public void handleMessageFromClientController(ServerService serverService) {
-		// TODO Auto-generated method stub
+		if((Boolean)serverService.getParams().get(0)==false)
+			IcmUtils.displayErrorMsg("no such mail");
+		else
+			IcmUtils.displayConfirmationMsg("email sent successfully");
 
 	}
 
