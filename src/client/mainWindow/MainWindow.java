@@ -10,8 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import server.ServerService;
 
@@ -71,11 +74,10 @@ public class MainWindow implements ClientUI {
     @FXML
     private Button itdManagerAssignPermissionsButton;
     @FXML
-    private MaterialDesignIconView itdManagerAssignPermissionsIcon;
-    @FXML
     private Button createReportButton;
+
     @FXML
-    private MaterialDesignIconView createReportIcon;
+    private AnchorPane mainAnchorPane;
 
     // class local variables
     private ClientController clientController;
@@ -170,8 +172,15 @@ public class MainWindow implements ClientUI {
     }
 
     @FXML
-    void showCreateReportDialog(ActionEvent event) {
-
+    void showCreateReportDialog(ActionEvent event) throws IOException {
+        Dialog<ButtonType> createReportDialog = new Dialog<>();
+        createReportDialog.initOwner(mainAnchorPane.getScene().getWindow());
+        Parent root = FXMLLoader.load(getClass().getResource("/client/crDetails/itd/createReport/CreateReport.fxml"));
+        createReportDialog.getDialogPane().setContent(root);
+        createReportDialog.setTitle("ITD Create Report");
+        createReportDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        createReportDialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        createReportDialog.showAndWait();
     }
 
     @FXML

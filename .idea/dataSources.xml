@@ -6,6 +6,7 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://box5264.bluehost.com:3306/cbaricmy_ICM</jdbc-url>
+      <keep-alive enable="true" />
     </data-source>
   </component>
 </project>

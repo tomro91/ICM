@@ -16,7 +16,8 @@ public class IcmUtils {
         Main_Window,
         Login,
         Main_Window_New,
-        Change_Request_Summary
+        Change_Request_Summary,
+        Itd_Create_Report
     }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -111,6 +112,12 @@ public class IcmUtils {
 
             case Change_Request_Summary:
                 sceneTitle = "ICM Change Request Summary";
+                fxmlPath = "/client/crDetails/CrDetails.fxml";
+                width = 1000;
+                height = 650;
+                break;
+            case Itd_Create_Report:
+                sceneTitle = "Create Reports";
                 fxmlPath = "/client/crDetails/CrDetails.fxml";
                 width = 1000;
                 height = 650;
