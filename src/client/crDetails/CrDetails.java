@@ -83,9 +83,6 @@ public class CrDetails implements ClientUI {
 
 
 
-
-
-
     @FXML
     void backToHome() {
         try {

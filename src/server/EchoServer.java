@@ -4,6 +4,7 @@ package server;// This file contains material supporting section 3.7 of the text
 
 import entities.ChangeInitiator;
 import entities.ChangeRequest;
+import entities.Phase;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -104,6 +105,20 @@ public class EchoServer extends AbstractServer {
                 // pass the request to the database
                 dbConnection.updateRequestDetails(requirementList);
                 break;
+            case Get_Phase_Details:
+            	System.out.println("server handle Get_Phase_Details");
+            	List<ChangeRequest> params = serverService.getParams();
+                System.out.println(params.get(0));
+                List<Phase> PhaseList =dbConnection.getPhaseDetails(params);
+                System.out.println(PhaseList);
+                System.out.println("Get_Phase_Details server got data");
+                serverService.setParams(PhaseList);
+                try {
+                    client.sendToClient(serverService);
+                    System.out.println("sent request details to client");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 

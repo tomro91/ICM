@@ -287,6 +287,41 @@ public class DBConnection {
         return crList;
     }
 
-}
+    public List<Phase> getPhaseDetails(List<ChangeRequest> params) {
 
+    	ChangeRequest currRequest = new ChangeRequest();
+    	List<Phase> phases = new ArrayList<>();
+    	
+    	 try {
+    	PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM phase WHERE phIDChangeRequest = ? AND phPhaseName = ?");
+    	currRequest=params.get(0);
+        ps.setInt(1, currRequest.getId());
+        ps.setString(2,currRequest.getCurrPhaseName().toString());
+
+        ResultSet rs = ps.executeQuery();
+        rs.beforeFirst();
+        rs.next();
+
+        Phase currPhase = new Phase();
+
+        currPhase.setChangeRequestId(currRequest.getId());
+        currPhase.setName(currRequest.getCurrPhaseName());
+        currPhase.setDeadLine(rs.getDate("phDeadLine").toLocalDate());
+        currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
+        currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
+        Date date = rs.getDate("phExceptionTime");
+        if(date != null) {
+            LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            currPhase.setExceptionTime(exceptionDate);
+            phases.add(currPhase);
+        }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	 	System.out.println(phases);
+            return phases;
+    } 
+    }
+      
 

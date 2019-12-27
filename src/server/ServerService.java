@@ -33,6 +33,7 @@ public class ServerService implements Serializable {
         Login,
         Get_All_Requests,
         Get_Request_Details,
-        Update_Request_Status
+        Update_Request_Status,
+        Get_Phase_Details,
     }
 }
