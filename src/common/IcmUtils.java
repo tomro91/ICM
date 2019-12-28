@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class IcmUtils {
 
+	private static Stage popUp;
+	
     public enum Scenes {
         Main_Window,
         Login,
@@ -147,7 +149,7 @@ public class IcmUtils {
         loadScene(clientUI, "ICM Main Window", "/client/mainWindow/MainWindowUI.fxml", 590, 565);
     }
     
-    public static void popUpScene(ClientUI clientUI, String sceneTitle, String fxmlPath, int width, int height) throws IOException {
+    public static void  popUpScene(ClientUI clientUI, String sceneTitle, String fxmlPath, int width, int height) throws IOException {
     	 System.out.println("Loading pop-up scene: " + sceneTitle);
          FXMLLoader loader = new FXMLLoader();
          Parent root = loader.load(clientUI.getClass().getResource(fxmlPath));
@@ -158,8 +160,15 @@ public class IcmUtils {
          popUpStage.initModality(Modality.WINDOW_MODAL);
          popUpStage.initOwner(ClientMain.getPrimaryStage());
          popUpStage.show();
-         
-         
+         popUp=popUpStage;
+    
     }
     
+    public static void setPopUp (Stage NewPopUp) {
+    	IcmUtils.popUp=NewPopUp;
+    }
+    
+    public static Stage getPopUp () {
+    	return IcmUtils.popUp;
+    }
 }

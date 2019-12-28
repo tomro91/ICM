@@ -13,6 +13,7 @@ public class Phase implements Serializable {
 	private boolean extensionRequest;
 	private Integer changeRequestId;
 	private LocalDate exceptionTime;
+	private String description;      ///// Check with team!!!!!!!
 	private Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePosition;
 
 	public enum PhaseName {
@@ -29,7 +30,8 @@ public class Phase implements Serializable {
 		TIME_REQUESTED,
 		TIME_APPROVED,
 		IN_PROCESS,
-		DONE
+		DONE,
+		EXTENSION_TIME_REQUESTED,
 	}
 
 	public PhaseName getName() {
@@ -59,6 +61,10 @@ public class Phase implements Serializable {
 
 	public PhaseStatus getPhaseStatus() {
 		return this.phaseStatus;
+	}
+	
+	public String getDescription() {
+		return this.description;
 	}
 
 	/**
@@ -110,6 +116,8 @@ public class Phase implements Serializable {
 		this.iePhasePosition = iePhasePosition;
 	}
 
-
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

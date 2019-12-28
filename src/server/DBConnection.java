@@ -286,23 +286,26 @@ public class DBConnection {
         }
         return crList;
     }
+    
 
-    public List<Phase> getPhaseDetails(List<ChangeRequest> params) {
+    public List<Phase> getPhaseDetails(List<ChangeRequest> crList) {
 
     	ChangeRequest currRequest = new ChangeRequest();
+    	Phase currPhase = new Phase();
     	List<Phase> phases = new ArrayList<>();
+    	currRequest=crList.get(0);
+    	System.out.println(currRequest);
+    	//System.out.println(currRequest.getId());
+    	//System.out.println(currRequest.getCurrPhaseName().toString());
     	
     	 try {
     	PreparedStatement ps = sqlConnection.prepareStatement("SELECT * FROM phase WHERE phIDChangeRequest = ? AND phPhaseName = ?");
-    	currRequest=params.get(0);
         ps.setInt(1, currRequest.getId());
         ps.setString(2,currRequest.getCurrPhaseName().toString());
 
         ResultSet rs = ps.executeQuery();
         rs.beforeFirst();
         rs.next();
-
-        Phase currPhase = new Phase();
 
         currPhase.setChangeRequestId(currRequest.getId());
         currPhase.setName(currRequest.getCurrPhaseName());
@@ -313,15 +316,51 @@ public class DBConnection {
         if(date != null) {
             LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             currPhase.setExceptionTime(exceptionDate);
-            phases.add(currPhase);
         }
         
+        phases.add(currPhase);
+        ps.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    	 	System.out.println(phases);
             return phases;
     } 
+    
+    public List<Boolean> updatePhaseExtensionTime (List<Phase> pList) {
+    	
+    	List<Boolean> updateList = new ArrayList<>();
+    	boolean update= false; 
+    	Phase currPhase = new Phase();
+    	currPhase=pList.get(0);
+    	System.out.println(currPhase);
+    	Date date =Date.from(currPhase.getExceptionTime().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    	java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    	
+    	 try {
+    		 PreparedStatement ps = sqlConnection.prepareStatement("UPDATE cbaricmy_ICM.phase SET phExceptionTime=?,phStatus=?,phExtensionRequest=? WHERE phIDChangeRequest = ? AND phPhaseName = ?");
+             ps.setDate(1,sqlDate);
+             ps.setString(2, currPhase.getPhaseStatus().toString());
+             ps.setBoolean(3, currPhase.isExtensionRequest());
+             ps.setInt(4, currPhase.getChangeRequestId());
+             ps.setString(5, currPhase.getName().toString());
+             
+             System.out.println(sqlDate+ " " +currPhase.getPhaseStatus().toString()+ " "+currPhase.isExtensionRequest());
+             System.out.println(currPhase.getChangeRequestId()+" "+ currPhase.getName().toString());
+             
+                ps.executeUpdate();
+    	        ps.close();
+    	        System.out.println("phase extension updated");
+    	        update= true;
+    	        updateList.add(update);
+    	        
+    	        } catch (SQLException e) {
+    	            e.printStackTrace();
+    	        }
+    	            return updateList;
+    	
+    }
+    
     }
       
 

@@ -58,7 +58,6 @@ public class ClientController extends AbstractClient {
      */
     public void handleMessageFromServer(Object msg) {
         ServerService serverService = (ServerService) msg;
-        System.out.println(serverService);
         System.out.println("Sending to clientUI: " + serverService.getDatabaseService());
         Platform.runLater(new Runnable() {
             @Override

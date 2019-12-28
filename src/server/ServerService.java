@@ -35,5 +35,6 @@ public class ServerService implements Serializable {
         Get_Request_Details,
         Update_Request_Status,
         Get_Phase_Details,
+        Update_Phase_Extension,
     }
 }
