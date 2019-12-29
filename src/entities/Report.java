@@ -15,6 +15,8 @@ public class Report {
 	private int reportId;
 
 	public enum ReportType {
+		// TODO: change reports name
+		// TODO: add report implementation
 		A,
 		B,
 		C,
