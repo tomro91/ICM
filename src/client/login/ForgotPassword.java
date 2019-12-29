@@ -35,12 +35,7 @@ public class ForgotPassword implements ClientUI {
 	}
 
 	public void forgotPasswordAction(ActionEvent e) {
-		IcmUtils.displayInformationMsg("restore password sent to you", "please check your entered email");
-		try {
-			IcmUtils.loadScene(this, IcmUtils.Scenes.Login);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		IcmUtils.displayInformationMsg("restore password is in process");
 		List<String> email = new ArrayList<String>();
 		if(!loginEmailTextField.getText().equals(""))
 		{
@@ -60,11 +55,10 @@ public class ForgotPassword implements ClientUI {
 	}
 	@Override
 	public void handleMessageFromClientController(ServerService serverService) {
-		//try {
-		//	IcmUtils.loadScene(this, IcmUtils.Scenes.Login);
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-	//	}
+		if((Boolean)serverService.getParams().get(0)==false)
+			IcmUtils.displayErrorMsg("no such mail");
+		else
+			IcmUtils.displayConfirmationMsg("email sent successfully");
 
 	}
 
