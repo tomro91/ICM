@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane fx:id="createReportDialogPane" prefHeight="340.0" prefWidth="460.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.crDetails.itd.itdCreateReport.ITDCreateReport">
+   <content>
+      <AnchorPane style="-fx-background-color: white;">
+         <children>
+            <Label contentDisplay="RIGHT" layoutX="140.0" layoutY="31.0" prefHeight="36.0" prefWidth="221.0" text="Create Report    ">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="FILE_TEXT_ALT" size="25" wrappingWidth="22.952340126037598" />
+               </graphic>
+            </Label>
+            <Label layoutX="141.0" layoutY="86.0" text="Start Date">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="startDateDatePicker" layoutX="141.0" layoutY="114.0" />
+            <Label layoutX="141.0" layoutY="152.0" text="End Date">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="endDateDatePicker" layoutX="141.0" layoutY="180.0" />
+            <Label layoutX="141.0" layoutY="224.0" text="Report Type">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="141.0" layoutY="252.0" prefHeight="25.0" prefWidth="175.0" />
+         </children>
+      </AnchorPane>
+   </content>
+</DialogPane>
