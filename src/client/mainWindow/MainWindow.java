@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
-import static javafx.beans.binding.Bindings.createBooleanBinding;
 
 public class MainWindow implements ClientUI {
 
@@ -210,6 +207,7 @@ public class MainWindow implements ClientUI {
         createReportDialog.getDialogPane().lookupButton(createButton).disableProperty()
                 .bind(bb);
 
+        // if create button is pressed, create report
         Optional<ButtonType> result = createReportDialog.showAndWait();
         if (result.isPresent() && result.get() == createButton) {
             ITDCreateReport.createReport();
