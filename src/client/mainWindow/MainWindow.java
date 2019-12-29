@@ -34,9 +34,14 @@ public class MainWindow implements ClientUI {
     private Button searchButton;
     @FXML
     private Button logoutButton;
+    @FXML
+    private TabPane tabPane;
+
 
     @FXML
     private Tab inMyTreatmentTab;
+    @FXML
+    private Tab myRequestsTab;
     // my change requests tab
     @FXML
     private TableView<ChangeRequest> myTableView;
@@ -68,6 +73,25 @@ public class MainWindow implements ClientUI {
     private TableColumn<ChangeRequest, Phase.PhaseStatus> phaseStatusColumn1;
     @FXML
     private TableColumn<ChangeRequest, String> phaseLeaderColumn1;
+
+    // search results tab
+    @FXML
+    private Tab searchTab;
+    @FXML
+    private TableView<ChangeRequest> searchTableView;
+    @FXML
+    private TableColumn<ChangeRequest, Integer> idColumn2;
+    @FXML
+    private TableColumn<ChangeRequest, InfoSystem> infoSystemColumn2;
+    @FXML
+    private TableColumn<ChangeRequest, LocalDate> dateColumn2;
+    @FXML
+    private TableColumn<ChangeRequest, Phase.PhaseName> currPhaseColumn2;
+    @FXML
+    private TableColumn<ChangeRequest, Phase.PhaseStatus> phaseStatusColumn2;
+    @FXML
+    private TableColumn<ChangeRequest, String> phaseLeaderColumn2;
+
 
     // buttons VBox
     @FXML
@@ -107,42 +131,17 @@ public class MainWindow implements ClientUI {
         inMyTreatmentRequests = FXCollections.observableArrayList();
 
         // init tables columns
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        infoSystemColumn.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        currPhaseColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseName"));
-        phaseStatusColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
-        phaseLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
-
-        idColumn1.setCellValueFactory(new PropertyValueFactory<>("id"));
-        infoSystemColumn1.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
-        dateColumn1.setCellValueFactory(new PropertyValueFactory<>("date"));
-        currPhaseColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseName"));
-        phaseStatusColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
-        phaseLeaderColumn1.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
+        initTableValueFactory(idColumn, infoSystemColumn, dateColumn, currPhaseColumn, phaseStatusColumn, phaseLeaderColumn);
+        initTableValueFactory(idColumn1, infoSystemColumn1, dateColumn1, currPhaseColumn1, phaseStatusColumn1, phaseLeaderColumn1);
+        initTableValueFactory(idColumn2, infoSystemColumn2, dateColumn2, currPhaseColumn2, phaseStatusColumn2, phaseLeaderColumn2);
 
         // init tables double clicks to open change request
-        myTableView.setRowFactory(tv -> {
-            TableRow<ChangeRequest> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetails.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
-                    showRequestDialog();
-                }
-            });
-            return row;
-        });
+        initRowDoubleClick(myTableView);
+        initRowDoubleClick(workTableView);
+        initRowDoubleClick(searchTableView);
 
-        workTableView.setRowFactory(tv -> {
-            TableRow<ChangeRequest> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    CrDetails.setCurrRequest(workTableView.getSelectionModel().getSelectedItem());
-                    showRequestDialog();
-                }
-            });
-            return row;
-        });
+        //hide search table when it unnecessary
+        searchTab.setDisable(true);
 
         // load data into tables
         // prepare service request to pass to server
@@ -156,19 +155,58 @@ public class MainWindow implements ClientUI {
         //initialize search change listener
         searchChangeRequestTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             ObservableList<ChangeRequest> searchResult = FXCollections.observableArrayList();
+
             if(!newValue.trim().equals("")) {
                 ChangeRequest searchValue = new ChangeRequest();
                 searchValue.setId(Integer.parseInt(newValue));
                 int index = myRequests.indexOf(searchValue);
-                if(index!= -1) {
-                    searchResult.add(myRequests.get(index));
+
+                if (index != -1) {
+                    searchResult.setAll(myRequests.get(index));
+                } else if (inMyTreatmentRequests != null) {
+                    index = inMyTreatmentRequests.indexOf(searchValue);
+                    if (index != -1) {
+                        searchResult.setAll(inMyTreatmentRequests.get(index));
+                    } else {
+                        searchTab.setDisable(true);
+                        tabPane.getSelectionModel().select(myRequestsTab);
+                    }
                 }
-                myTableView.setItems(searchResult);
+                searchTableView.setItems(searchResult);
+                searchTab.setDisable(false);
+                tabPane.getSelectionModel().select(searchTab);
             } else {
-                myTableView.setItems(myRequests);
+                searchTab.setDisable(true);
+                tabPane.getSelectionModel().select(myRequestsTab);
             }
-            System.out.println("textfield changed from " + oldValue + " to " + newValue);
         });
+    }
+
+    private void initRowDoubleClick(TableView<ChangeRequest> myTableView) {
+        myTableView.setRowFactory(tv -> {
+            TableRow<ChangeRequest> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    CrDetails.setCurrRequest(myTableView.getSelectionModel().getSelectedItem());
+                    showRequestDialog();
+                }
+            });
+            return row;
+        });
+    }
+
+    private void initTableValueFactory(TableColumn<ChangeRequest, Integer> idColumn,
+                                       TableColumn<ChangeRequest, InfoSystem> infoSystemColumn,
+                                       TableColumn<ChangeRequest, LocalDate> dateColumn,
+                                       TableColumn<ChangeRequest, Phase.PhaseName> currPhaseColumn,
+                                       TableColumn<ChangeRequest, Phase.PhaseStatus> phaseStatusColumn,
+                                       TableColumn<ChangeRequest, String> phaseLeaderColumn) {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        infoSystemColumn.setCellValueFactory(new PropertyValueFactory<>("infoSystem"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        currPhaseColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseName"));
+        phaseStatusColumn.setCellValueFactory(new PropertyValueFactory<>("currPhaseStatus"));
+        phaseLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("currPhasePhaseLeaderName"));
     }
 
     private void showRequestDialog() {
@@ -255,4 +293,5 @@ public class MainWindow implements ClientUI {
             workTableView.setItems(inMyTreatmentRequests);
         }
     }
+
 }
