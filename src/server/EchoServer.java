@@ -94,9 +94,6 @@ public class EchoServer extends AbstractServer {
 					}
 				} catch (Exception e) {
 =======
-					emailer.sendEmail((String)l.get(4), "restore password", text);
-					
-				} catch (MessagingException e) {
 >>>>>>> master
 					// TODO Auto-generated catch block
 					e.printStackTrace();
