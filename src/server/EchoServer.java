@@ -92,12 +92,7 @@ public class EchoServer extends AbstractServer {
 				
 				try {
 					emailer.sendEmail((String)l.get(4), "restore password", text);
-					try {
-						client.sendToClient(new ServerService(DatabaseService.Forgot_Password, l));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
