@@ -29,7 +29,7 @@
       </Label>
       <TextField fx:id="userName" layoutX="140.0" layoutY="175.0" prefHeight="30.0" prefWidth="210.0" promptText="Enter username" style="-fx-background-radius: 10;" />
       <PasswordField fx:id="password" layoutX="140.0" layoutY="245.0" prefHeight="30.0" prefWidth="210.0" promptText="Enter Password" style="-fx-background-radius: 10;" />
-      <JFXButton layoutX="134.0" layoutY="286.0" prefHeight="31.0" prefWidth="151.0" text="Forgot password?" textFill="#294aae" underline="true" />
+      <JFXButton fx:id="ForgotPass" layoutX="134.0" layoutY="286.0" onAction="#forgotPass" prefHeight="31.0" prefWidth="151.0" text="Forgot password?" textFill="#294aae" underline="true" />
       <Button fx:id="loginButton" defaultButton="true" layoutX="269.0" layoutY="329.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="81.0" style="-fx-background-radius: 10;" text="Login">
          <font>
             <Font size="16.0" />
