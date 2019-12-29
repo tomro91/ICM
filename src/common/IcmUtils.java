@@ -15,10 +15,15 @@ public class IcmUtils {
     public enum Scenes {
         Main_Window,
         Login,
+        Forgot_Password,
         Main_Window_New,
         Change_Request_Summary,
-        Itd_Create_Report
-    }
+        Create_Evaluation_Report,
+        show_Request_Time_Dialog,
+        Itd_Create_Report,
+        
+      
+        }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -97,6 +102,12 @@ public class IcmUtils {
                 width = 500;
                 height = 410;
                 break;
+            case Forgot_Password:
+            	 sceneTitle = "ICM - Forgot password";
+                 fxmlPath = "/client/login/ForgotPassword.fxml";
+                 width = 500;
+                 height = 410;
+                 break;
             case Main_Window:
                 sceneTitle = "ICM Main Window";
                 fxmlPath = "/client/mainWindow/MainWindowUI.fxml";
@@ -116,6 +127,19 @@ public class IcmUtils {
                 width = 1000;
                 height = 650;
                 break;
+                
+            case Create_Evaluation_Report:
+                sceneTitle = "ICM Create Evaluation Report";
+                fxmlPath = "/client/crDetails/evaluator/createEvaluationReport.fxml";
+                width = 600;
+                height = 632;
+                break;
+            case show_Request_Time_Dialog:
+            	sceneTitle = "ICM request time dialog";
+                fxmlPath = "/client/crDetails/evaluator/TimeRequest.fxml";
+                width = 600;
+                height = 632;
+                
             case Itd_Create_Report:
                 sceneTitle = "Create Reports";
                 fxmlPath = "/client/crDetails/CrDetails.fxml";

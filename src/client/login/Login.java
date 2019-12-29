@@ -3,6 +3,8 @@ package client.login;
 import client.ClientController;
 import client.ClientMain;
 import client.ClientUI;
+
+import com.jfoenix.controls.JFXButton;
 import com.mysql.cj.xdevapi.Client;
 import common.IcmUtils;
 import entities.ChangeInitiator;
@@ -25,6 +27,8 @@ public class Login implements ClientUI {
     private Button loginButton;
     @FXML
     private PasswordField password;
+    @FXML
+    private JFXButton ForgotPass;
 
     private ClientController clientController = null;
 
@@ -48,6 +52,15 @@ public class Login implements ClientUI {
         clientController.handleMessageFromClientUI(loginService);
 
 
+    }
+    //forgot password button
+    @FXML
+    void forgotPass(ActionEvent event) {
+    	try {
+			IcmUtils.loadScene(this, IcmUtils.Scenes.Forgot_Password);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override

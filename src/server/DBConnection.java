@@ -1,13 +1,18 @@
 package server;
 
 import entities.*;
+import server.ServerService.DatabaseService;
 
 import java.sql.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.Date;
 
+import client.crDetails.CrDetails;
 
 public class DBConnection {
 
@@ -287,6 +292,116 @@ public class DBConnection {
         return crList;
     }
 
+
+	public List<Boolean> createEvaluationReport(List<String> requirementList1) {
+		boolean flag=false;
+		List<Boolean>l=new ArrayList<Boolean>();
+		//insert new evaluation report to db
+		try {
+			System.out.println("insert new evaluation report");
+			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO evaluationReport(cRequestID,infoSystem,requestedChange,expectedResult,risksAndConstraints,EvaluatedTime) VALUES(?,?,?,?,?,?)");
+			ps.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps.setString(2, requirementList1.get(1));
+			ps.setString(3, requirementList1.get(2));
+			ps.setString(4, requirementList1.get(3));
+			ps.setString(5, requirementList1.get(4));
+			ps.setDate(6, Date.valueOf(requirementList1.get(5)));
+			ps.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		//update phase of specific request to examination in change request table
+		try {
+			System.out.println("update current phase of request to examination");
+			PreparedStatement ps1=sqlConnection.prepareStatement("UPDATE changeRequest SET crCurrPhaseName = 'EXAMINATION' WHERE crID = ?");
+			ps1.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps1.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		//update evaluation phase of specific request status to done
+		try {
+			PreparedStatement ps1=sqlConnection.prepareStatement("UPDATE phase SET phStatus = 'DONE' WHERE phIDChangeRequest = ?");
+			ps1.setInt(1, Integer.parseInt(requirementList1.get(0)));
+			ps1.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		//insert examination phase to specific request with status phase leader assigned
+		try {
+			PreparedStatement ps=sqlConnection.prepareStatement("INSERT INTO phase VALUES(?,'EXAMINATION',?,'PHASE_LEADER_ASSIGNED',0,null)");
+			ps.setInt(1, Integer.parseInt(requirementList1.get(0)));//id
+			LocalDate newDate=CrDetails.getCurrRequest().getPhases().get(0).getDeadLine().plusDays(7);
+			ps.setDate(2, Date.valueOf(newDate));
+			ps.executeUpdate();
+			flag=true;
+			l.add(flag);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			flag=false;
+			l.add(flag);
+			e.printStackTrace();
+		}
+		return l;
+	
+	}
+
+
+	public List<Boolean> requestTimeEvaluation(List<Object> requestTimeDetails) {
+		List<Boolean>list=new ArrayList<Boolean>();
+		try {
+			PreparedStatement ps=sqlConnection.prepareStatement("UPDATE cbaricmy_ICM.phase SET phDeadline = ? ,phStatus='TIME_REQUESTED' WHERE phIDChangeRequest =?");
+			ps.setInt(2, (int)requestTimeDetails.get(0));
+			ps.setDate(1, Date.valueOf((LocalDate) requestTimeDetails.get(1)));
+			ps.executeUpdate();
+			list.add(true);
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			list.add(false);
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	public List<Object> forgotPasswordRequest(List<String> params) {
+		List<Object>l=new ArrayList<Object>();
+		try {
+			PreparedStatement ps=sqlConnection.prepareStatement("SELECT IDuser,firstName,password FROM cbaricmy_ICM.users where email=?");
+			ps.setString(1, params.get(0));
+			ResultSet rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				l.add(true);
+				l.add(rs.getInt("IDUser"));
+				l.add(rs.getString("firstName"));
+				l.add(rs.getString("password"));
+				l.add(params.get(0));
+			}
+			else
+				l.add(false);
+					
+		} 
+		catch (SQLException e) {
+			
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return l;
+	}
+
 }
-
-

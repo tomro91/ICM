@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.crDetails.evaluator.RequestTimeEvaluation">
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -19,13 +19,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker layoutX="175.0" layoutY="166.0" />
-            <Button fx:id="applyButton" layoutX="295.0" layoutY="250.0" mnemonicParsing="false" onAction="#submitRequestTime" style="-fx-background-radius: 10; -fx-background-color: #4b92e8;" text="Submit">
+            <DatePicker fx:id="datePickid" layoutX="175.0" layoutY="166.0" />
+            <Button fx:id="applyButton" layoutX="295.0" layoutY="250.0" mnemonicParsing="false" onAction="#applyTimeRequest" style="-fx-background-radius: 10; -fx-background-color: #4b92e8;" text="Submit">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button cancelButton="true" layoutX="191.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-radius: 10;" text="Cancel">
+            <Button fx:id="cancelbtn" cancelButton="true" layoutX="191.0" layoutY="250.0" mnemonicParsing="false" onAction="#cancelTimeRequest" style="-fx-background-radius: 10;" text="Cancel">
                <font>
                   <Font size="14.0" />
                </font>
