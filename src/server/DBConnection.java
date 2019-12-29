@@ -106,7 +106,6 @@ public class DBConnection {
             Set<ChangeRequest> tempSet = insertRequestsIntoList(currUser.getId());
             myRequests.addAll(tempSet);
             allRequests.add(myRequests);
-            System.out.println("1 succeed");
 
             if (currUser.getTitle() != ChangeInitiator.Title.INFOENGINEER)
                 return allRequests;
@@ -125,8 +124,10 @@ public class DBConnection {
                     break;
                 case CHAIRMAN: case CCC:
                     ps = sqlConnection.prepareStatement("SELECT CR.crID, CR.crInfoSystem, CR.crDate, CR.crCurrPhaseName " +
-                            "FROM changeRequest CR " +
-                            "WHERE CR.crCurrPhaseName = 'EXAMINATION'");
+                            "FROM changeRequest CR,  ieInPhase IE " +
+                            "WHERE CR.crCurrPhaseName = 'EXAMINATION' " +
+                                "OR (CR.crCurrPhaseName = IE.iePhaseName AND " +
+                                    "IE.iePhasePosition = 'TESTER')");
                     break;
                 case REGULAR:
                     ps = sqlConnection.prepareStatement(
