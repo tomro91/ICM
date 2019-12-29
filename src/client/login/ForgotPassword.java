@@ -35,6 +35,7 @@ public class ForgotPassword implements ClientUI {
 	}
 
 	public void forgotPasswordAction(ActionEvent e) {
+		IcmUtils.displayInformationMsg("restore password is in process");
 		List<String> email = new ArrayList<String>();
 		if(!loginEmailTextField.getText().equals(""))
 		{
