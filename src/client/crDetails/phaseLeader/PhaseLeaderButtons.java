@@ -18,7 +18,6 @@ import client.crDetails.CrDetails;
 
 public class PhaseLeaderButtons implements ClientUI {
 
-	
  
     @FXML
     void showExtensionTimeDialog(ActionEvent event) {

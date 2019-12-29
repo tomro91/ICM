@@ -231,11 +231,11 @@ public class DBConnection {
             currPhase.setDeadLine(rs.getDate("phDeadLine").toLocalDate());
             currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
             currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
-            Date date = rs.getDate("phExceptionTime");
-            if(date != null) {
-                LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                currPhase.setExceptionTime(exceptionDate);
-            }
+           // Date date = rs.getDate("phExceptionTime");
+            //if(date != null) {
+                //LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+               // currPhase.setExceptionTime(exceptionDate);
+           //}
 
             crPhaseList.add(currPhase);
             ps.close();

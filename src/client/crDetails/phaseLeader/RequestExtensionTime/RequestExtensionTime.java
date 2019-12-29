@@ -67,7 +67,7 @@ public class RequestExtensionTime implements ClientUI{
     	LocalDate currDate = LocalDate.now();     // Create a date object
     	LocalDate deadLine = currPhase.getDeadLine();
     	final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    	final long days = ChronoUnit.DAYS.between(currDate, deadLine);
+    	final long  days = (ChronoUnit.DAYS.between(currDate, deadLine))+1;
         System.out.println("Days between: " + days);
     	
     if(!(days< 4 && days > 0)|| days>3) {
