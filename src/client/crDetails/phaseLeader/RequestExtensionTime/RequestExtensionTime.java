@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientController;
+import client.ClientMain;
 import client.ClientUI;
 import client.crDetails.CrDetails;
 import client.crDetails.phaseLeader.PhaseLeaderButtons;
@@ -24,6 +25,9 @@ import server.ServerService;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeFormatter;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class RequestExtensionTime implements ClientUI{
 	
@@ -36,19 +40,19 @@ public class RequestExtensionTime implements ClientUI{
 	@FXML
 	private Button CancelButton;
 
+	
 	private Phase newCurrPhase;
 	private LocalDate datePickerChoice;
 	private String description;
 	private ClientController clientController;
 	final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+
 	public void initialize() {
 		 try {
 	            clientController = ClientController.getInstance(this);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-  
 	}
 	
     @FXML
@@ -68,7 +72,7 @@ public class RequestExtensionTime implements ClientUI{
             phaseList.add(newCurrPhase);
             System.out.printf("%s\n",phaseList);
             ServerService updatePhaseExtension = new ServerService(ServerService.DatabaseService.Update_Phase_Extension, phaseList);
-            System.out.println(updatePhaseExtension);
+            //System.out.println(updatePhaseExtension);
             clientController.handleMessageFromClientUI(updatePhaseExtension);  
     }
     
@@ -89,11 +93,9 @@ public class RequestExtensionTime implements ClientUI{
         	boolean checkUpdate= update.get(0);
         	if(checkUpdate== true) {
         		IcmUtils.displayInformationMsg("Time Extension Request Submited", "Time extension request has been successfully submited", "Time extension request: " + newCurrPhase.getExceptionTime().format(formatter));
-        	    IcmUtils.getPopUp().close();
+        	    IcmUtils.getPopUp().close();    	  
         	}
         	
-        	break;
-    }
-    	
+        	break; }
     }
 }

@@ -74,7 +74,6 @@ public class ClientController extends AbstractClient {
      */
     public void handleMessageFromClientUI(Object service) {
         try {
-        	System.out.println("Sending");
             sendToServer(service);
         } catch (IOException e) {
             IcmUtils.displayErrorMsg

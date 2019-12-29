@@ -307,16 +307,11 @@ public class DBConnection {
         rs.beforeFirst();
         rs.next();
 
-        currPhase.setChangeRequestId(currRequest.getId());
+        currPhase.setChangeRequestId(currRequest.getId());     
         currPhase.setName(currRequest.getCurrPhaseName());
         currPhase.setDeadLine(rs.getDate("phDeadLine").toLocalDate());
         currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
         currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
-        Date date = rs.getDate("phExceptionTime");
-        if(date != null) {
-            LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            currPhase.setExceptionTime(exceptionDate);
-        }
         
         phases.add(currPhase);
         ps.close();
@@ -345,8 +340,8 @@ public class DBConnection {
              ps.setInt(4, currPhase.getChangeRequestId());
              ps.setString(5, currPhase.getName().toString());
              
-             System.out.println(sqlDate+ " " +currPhase.getPhaseStatus().toString()+ " "+currPhase.isExtensionRequest());
-             System.out.println(currPhase.getChangeRequestId()+" "+ currPhase.getName().toString());
+             //System.out.println(sqlDate+ " " +currPhase.getPhaseStatus().toString()+ " "+currPhase.isExtensionRequest());
+            // System.out.println(currPhase.getChangeRequestId()+" "+ currPhase.getName().toString());
              
                 ps.executeUpdate();
     	        ps.close();

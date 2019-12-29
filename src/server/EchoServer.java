@@ -110,7 +110,7 @@ public class EchoServer extends AbstractServer {
             	List<ChangeRequest> ChangeRequestList = serverService.getParams();
                 System.out.println(ChangeRequestList.get(0));
                 List<Phase> PhaseList =dbConnection.getPhaseDetails(ChangeRequestList);
-                System.out.println(PhaseList);
+                //System.out.println(PhaseList);
                 System.out.println("Get_Phase_Details server got data");
                 serverService.setParams(PhaseList);
                 try {
@@ -125,7 +125,7 @@ public class EchoServer extends AbstractServer {
             	List<Phase> phaseList2 = serverService.getParams();
                 System.out.println(phaseList2.get(0));
                 List<Boolean> isUpdate =dbConnection.updatePhaseExtensionTime(phaseList2);
-                System.out.println(isUpdate);
+               // System.out.println(isUpdate);
                 System.out.println("Update_Phase_Extension server got data");
                 serverService.setParams(isUpdate);
                 try {
