@@ -63,7 +63,7 @@ public class RequestExtensionTime implements ClientUI{
     		description = DescriptionTextAreaDescriptionTextArea.getText();
     		System.out.println(description+datePickerChoice.format(formatter));
     		
-    		newCurrPhase.setExceptionTime(datePickerChoice);
+    		newCurrPhase.setTimeExtensionRequest(datePickerChoice);
     		newCurrPhase.setExtensionRequest(true);
     		newCurrPhase.setPhaseStatus(PhaseStatus.EXTENSION_TIME_REQUESTED);
     		newCurrPhase.setDescription(description);
@@ -92,7 +92,7 @@ public class RequestExtensionTime implements ClientUI{
         	List<Boolean> update=serverService.getParams();
         	boolean checkUpdate= update.get(0);
         	if(checkUpdate== true) {
-        		IcmUtils.displayInformationMsg("Time Extension Request Submited", "Time extension request has been successfully submited", "Time extension request: " + newCurrPhase.getExceptionTime().format(formatter));
+        		IcmUtils.displayInformationMsg("Time Extension Request Submited", "Time extension request has been successfully submited", "Time extension request: " + newCurrPhase.getTimeExtensionRequest().format(formatter));
         	    IcmUtils.getPopUp().close();    	  
         	}
         	

@@ -13,6 +13,7 @@ public class Phase implements Serializable {
 	private boolean extensionRequest;
 	private Integer changeRequestId;
 	private LocalDate exceptionTime;
+	private LocalDate timeExtensionRequest;   ///// Check with team!!!!!!!
 	private String description;      ///// Check with team!!!!!!!
 	private Map<IEPhasePosition.PhasePosition, IEPhasePosition> iePhasePosition;
 
@@ -103,9 +104,17 @@ public class Phase implements Serializable {
 	public LocalDate getExceptionTime() {
 		return exceptionTime;
 	}
+	
+	public LocalDate getTimeExtensionRequest() {
+		return timeExtensionRequest;
+	}
 
 	public void setExceptionTime(LocalDate exceptionTime) {
 		this.exceptionTime = exceptionTime;
+	}
+	
+	public void setTimeExtensionRequest(LocalDate timeExtesion) {
+		this.timeExtensionRequest = timeExtesion;
 	}
 
 	public Map<IEPhasePosition.PhasePosition, IEPhasePosition> getIePhasePosition() {
