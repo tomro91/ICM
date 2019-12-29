@@ -1,6 +1,11 @@
 package entities;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Report {
 
@@ -8,6 +13,25 @@ public class Report {
 	private LocalDate endDate;
 	private String title;
 	private int reportId;
+
+	public enum ReportType {
+		// TODO: change reports name
+		// TODO: add report implementation
+		A,
+		B,
+		C,
+		Custom
+	}
+
+	public static ObservableList<ReportType> getAllReportTypes() {
+		ObservableList<ReportType> reportTypes = FXCollections.observableArrayList();
+		reportTypes.add(ReportType.A);
+		reportTypes.add(ReportType.B);
+		reportTypes.add(ReportType.C);
+		reportTypes.add(ReportType.Custom);
+
+		return reportTypes;
+	}
 
 	public LocalDate getStartDate() {
 		return this.startDate;
