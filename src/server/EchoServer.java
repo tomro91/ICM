@@ -84,6 +84,7 @@ public class EchoServer extends AbstractServer {
 				 emailer.setMailServerProperties();
 
 				try {
+<<<<<<< HEAD
 					emailer.sendEmail((String) l.get(4), "restore password", text);
 					try {
 						client.sendToClient(new ServerService(DatabaseService.Forgot_Password, l));
@@ -92,6 +93,8 @@ public class EchoServer extends AbstractServer {
 						e.printStackTrace();
 					}
 				} catch (Exception e) {
+=======
+>>>>>>> master
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
