@@ -23,6 +23,7 @@ public class Phase implements Serializable {
 	}
 
 	public enum PhaseStatus {
+		SUBMITTED,
 		PHASE_LEADER_ASSIGNED,
 		PHASE_EXEC_LEADER_ASSIGNED,
 		TIME_REQUESTED,

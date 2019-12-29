@@ -2,7 +2,9 @@ package client.mainWindow.newRequest;
 
 import client.ClientController;
 import client.ClientUI;
+import entities.ChangeRequest;
 import entities.InfoSystem;
+import entities.Phase;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -15,6 +17,9 @@ import server.ServerService;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewRequest implements ClientUI {
 
@@ -91,6 +96,31 @@ public class NewRequest implements ClientUI {
     @FXML
     public void submitNewChangeRequest() {
         System.out.println("new request");
+
+        ChangeRequest newRequest = new ChangeRequest();
+        newRequest.setInitiator(ClientController.getUser());
+        newRequest.setDate(LocalDate.now());
+        newRequest.setInfoSystem(infoSystemChoiceBox.getSelectionModel().getSelectedItem());
+        newRequest.setCurrState(currentStateTextArea.textProperty().getValue());
+        newRequest.setRequestedChange(requestedChangeTextArea.textProperty().getValue());
+        newRequest.setReasonForChange(reasonForChangeTextArea.textProperty().getValue());
+        newRequest.setComment(commentsTextArea.textProperty().getValue());
+        newRequest.setCurrPhaseName(Phase.PhaseName.EVALUATION);
+        // TODO: add implementation to files
+
+        Phase evaluation = new Phase();
+        evaluation.setName(Phase.PhaseName.EVALUATION);
+        evaluation.setPhaseStatus(Phase.PhaseStatus.SUBMITTED);
+
+        List<Phase> phaseList = new ArrayList<>();
+        phaseList.add(evaluation);
+        newRequest.setPhases(phaseList);
+
+        List<ChangeRequest> changeRequestList = new ArrayList<>();
+        changeRequestList.add(newRequest);
+        ServerService addNewRequest = new ServerService(ServerService.DatabaseService.Add_New_Request, changeRequestList);
+
+        clientController.handleMessageFromClientUI(addNewRequest);
     }
 
     @Override

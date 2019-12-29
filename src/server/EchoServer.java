@@ -3,6 +3,7 @@ package server;// This file contains material supporting section 3.7 of the text
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
+import common.JavaEmail;
 import entities.ChangeInitiator;
 import entities.ChangeRequest;
 import ocsf.server.AbstractServer;
@@ -11,14 +12,6 @@ import server.ServerService.DatabaseService;
 
 import java.io.IOException;
 import java.util.List;
-
-import javax.mail.*;
-
-
-import client.ClientController;
-import client.ClientUI;
-import common.IcmUtils;
-import common.JavaEmail;
 
 /**
  * This class overrides some of the methods in the abstract superclass in order
@@ -89,20 +82,20 @@ public class EchoServer extends AbstractServer {
 				String text="hey "+(String)l.get(2)+"\n your id: "+(int)l.get(1)+"\n your password is: "+(String)l.get(3);
 				JavaEmail emailer=new JavaEmail();
 				 emailer.setMailServerProperties();
-				
+
 				try {
-					emailer.sendEmail((String)l.get(4), "restore password", text);
+					emailer.sendEmail((String) l.get(4), "restore password", text);
 					try {
 						client.sendToClient(new ServerService(DatabaseService.Forgot_Password, l));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} catch (MessagingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 
 		case Get_All_Requests:
@@ -156,9 +149,9 @@ public class EchoServer extends AbstractServer {
 			break;
 		case Request_Time_Evaluation:
 			System.out.println("server handle request time for evaluation phase");
-			List<Object>requestTimeDetails=serverService.getParams();
-			List<Boolean>list2=dbConnection.requestTimeEvaluation(requestTimeDetails);
-			ServerService s1= new ServerService(DatabaseService.Request_Time_Evaluation, list2);
+			List<Object> requestTimeDetails = serverService.getParams();
+			List<Boolean> list2 = dbConnection.requestTimeEvaluation(requestTimeDetails);
+			ServerService s1 = new ServerService(DatabaseService.Request_Time_Evaluation, list2);
 			try {
 				client.sendToClient(s1);
 				System.out.println("request time evaluation status sent to client");
@@ -166,6 +159,13 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+			case Add_New_Request:
+				System.out.println("server handle Add_New_Request");
+				List<ChangeRequest> changeRequestList = serverService.getParams();
+				ChangeRequest newRequest = changeRequestList.get(0);
+				dbConnection.addNewRequest(newRequest);
+				System.out.println("done");
+				break;
 		}
 	}
 
