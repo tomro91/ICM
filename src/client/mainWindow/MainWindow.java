@@ -152,6 +152,23 @@ public class MainWindow implements ClientUI {
         // pass to client controller.
         // client controller uses 'handleMessageFromClientController' function to load server answer into the ui
         clientController.handleMessageFromClientUI(serverService);
+
+        //initialize search change listener
+        searchChangeRequestTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<ChangeRequest> searchResult = FXCollections.observableArrayList();
+            if(!newValue.trim().equals("")) {
+                ChangeRequest searchValue = new ChangeRequest();
+                searchValue.setId(Integer.parseInt(newValue));
+                int index = myRequests.indexOf(searchValue);
+                if(index!= -1) {
+                    searchResult.add(myRequests.get(index));
+                }
+                myTableView.setItems(searchResult);
+            } else {
+                myTableView.setItems(myRequests);
+            }
+            System.out.println("textfield changed from " + oldValue + " to " + newValue);
+        });
     }
 
     private void showRequestDialog() {
@@ -171,6 +188,8 @@ public class MainWindow implements ClientUI {
 
     @FXML
     void search(ActionEvent event) {
+
+
 
     }
 
