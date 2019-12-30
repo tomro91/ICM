@@ -6,12 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class IcmUtils {
 
+	private static Stage popUp;
+	
     public enum Scenes {
         Main_Window,
         Login,
@@ -21,8 +24,7 @@ public class IcmUtils {
         Create_Evaluation_Report,
         show_Request_Time_Dialog,
         Itd_Create_Report,
-        
-      
+        Extention_Time_Request      
         }
 
     public static void displayConfirmationMsg(String title, String headerText, String contentText) {
@@ -146,6 +148,7 @@ public class IcmUtils {
                 width = 1000;
                 height = 650;
                 break;
+           
             default:
                 throw new IOException();
         }
@@ -166,5 +169,27 @@ public class IcmUtils {
 
     public static void loadHomeScene(ClientUI clientUI) throws IOException {
         loadScene(clientUI, "ICM Main Window", "/client/mainWindow/MainWindowUI.fxml", 590, 565);
+    }
+    
+    public static void popUpScene(ClientUI clientUI, String sceneTitle, String fxmlPath, int width, int height) throws IOException {
+    	 System.out.println("Loading pop-up scene: " + sceneTitle);
+         FXMLLoader loader = new FXMLLoader();
+         Parent root = loader.load(clientUI.getClass().getResource(fxmlPath));
+         Scene scene = new Scene(root, width, height);
+         Stage popUpStage = new Stage();
+         popUpStage.setScene(scene);
+         popUpStage.setTitle(sceneTitle);
+         popUpStage.initModality(Modality.WINDOW_MODAL);
+         popUpStage.initOwner(ClientMain.getPrimaryStage());
+         popUp=popUpStage;
+         popUpStage.showAndWait();
+    }
+    
+    public static void setPopUp (Stage NewPopUp) {
+    	IcmUtils.popUp=NewPopUp;
+    }
+    
+    public static Stage getPopUp () {
+    	return IcmUtils.popUp;
     }
 }

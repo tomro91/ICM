@@ -5,6 +5,7 @@ package server;// This file contains material supporting section 3.7 of the text
 
 import entities.ChangeInitiator;
 import entities.ChangeRequest;
+import entities.Phase;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import server.ServerService.DatabaseService;
@@ -31,6 +32,7 @@ import common.JavaEmail;
  * @version July 2000
  */
 public class EchoServer extends AbstractServer {
+
 	// Class variables *************************************************
 
 	private DBConnection dbConnection;
@@ -161,6 +163,36 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 			}
 			break;
+      case Get_Phase_Details:
+            	System.out.println("server handle Get_Phase_Details");
+            	List<ChangeRequest> ChangeRequestList = serverService.getParams();
+                System.out.println(ChangeRequestList.get(0));
+                List<Phase> PhaseList =dbConnection.getPhaseDetails(ChangeRequestList);
+                //System.out.println(PhaseList);
+                System.out.println("Get_Phase_Details server got data");
+                serverService.setParams(PhaseList);
+                try {
+                    client.sendToClient(serverService);
+                    System.out.println("sent request details to client");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case Update_Phase_Extension:
+            	System.out.println("server handle Update_Phase_Extension");
+            	List<Phase> phaseList2 = serverService.getParams();
+                System.out.println(phaseList2.get(0));
+                List<Boolean> isUpdate =dbConnection.updatePhaseExtensionTime(phaseList2);
+               // System.out.println(isUpdate);
+                System.out.println("Update_Phase_Extension server got data");
+                serverService.setParams(isUpdate);
+                try {
+                    client.sendToClient(serverService);
+                    System.out.println("sent request details to client");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break; 	
 		}
 	}
 
@@ -179,5 +211,4 @@ public class EchoServer extends AbstractServer {
 	protected void serverStopped() {
 		System.out.println("Server has stopped listening for connections.");
 	}
-
 }
