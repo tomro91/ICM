@@ -2,9 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-8.0.13"/>
-	<classpathentry kind="lib" path="mysql-connector-java-8.0.13.jar"/>
-	<classpathentry kind="lib" path="jfoenix-8.0.8.jar"/>
-	<classpathentry kind="lib" path="fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="libs/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="libs/jfoenix-8.0.8.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="libs/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/javax.mail-1.6.1.jar"/>
 	<classpathentry kind="output" path="out/production/ICMprototype"/>
 </classpath>

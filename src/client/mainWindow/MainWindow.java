@@ -3,15 +3,16 @@ package client.mainWindow;
 import client.ClientController;
 import client.ClientUI;
 import client.crDetails.CrDetails;
+import client.crDetails.itd.itdCreateReport.ITDCreateReport;
 import common.IcmUtils;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entities.*;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 public class MainWindow implements ClientUI {
 
@@ -173,14 +176,42 @@ public class MainWindow implements ClientUI {
 
     @FXML
     void showCreateReportDialog(ActionEvent event) throws IOException {
+
+        // load dialog pane
         Dialog<ButtonType> createReportDialog = new Dialog<>();
         createReportDialog.initOwner(mainAnchorPane.getScene().getWindow());
-        Parent root = FXMLLoader.load(getClass().getResource("/client/crDetails/itd/createReport/CreateReport.fxml"));
-        createReportDialog.getDialogPane().setContent(root);
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/client/crDetails/itd/itdCreateReport/ITDCreateReport.fxml"));
+        createReportDialog.getDialogPane().setContent(loader.load());
         createReportDialog.setTitle("ITD Create Report");
-        createReportDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+
+        ButtonType createButton = new ButtonType("Create");
+        createReportDialog.getDialogPane().getButtonTypes().add(createButton);
         createReportDialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        createReportDialog.showAndWait();
+
+        ITDCreateReport ITDCreateReport = loader.getController();
+
+        // disable Create button any field is invalid
+        BooleanBinding bb = Bindings.createBooleanBinding(() -> {
+            LocalDate from = ITDCreateReport.getStartDateDatePicker().getValue();
+            LocalDate to = ITDCreateReport.getEndDateDatePicker().getValue();
+            Report.ReportType reportType = ITDCreateReport.getReportTypeChoiceBox().getSelectionModel().getSelectedItem();
+
+            // disable, if one selection is missing or from is not smaller than to
+            return (from == null || to == null || (from.compareTo(to) >= 0) || reportType == null);
+        }, ITDCreateReport.getStartDateDatePicker().valueProperty(),
+                ITDCreateReport.getEndDateDatePicker().valueProperty(),
+                ITDCreateReport.getReportTypeChoiceBox().valueProperty()
+        );
+        createReportDialog.getDialogPane().lookupButton(createButton).disableProperty()
+                .bind(bb);
+
+        // if create button is pressed, create report
+        Optional<ButtonType> result = createReportDialog.showAndWait();
+        if (result.isPresent() && result.get() == createButton) {
+            ITDCreateReport.createReport();
+        }
     }
 
     @FXML
