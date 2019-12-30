@@ -1,18 +1,13 @@
 package server;
 
+import client.crDetails.CrDetails;
 import entities.*;
-import server.ServerService.DatabaseService;
 
-import java.sql.*;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import client.crDetails.CrDetails;
 
 public class DBConnection {
 
@@ -238,11 +233,11 @@ public class DBConnection {
             currPhase.setPhaseStatus(Phase.PhaseStatus.valueOf(rs.getString("phStatus")));
             currPhase.setExtensionRequest(rs.getBoolean("phExtensionRequest"));
             // TODO: handle phExtensionRequest
-           // Date date = rs.getDate("phExceptionTime");
-            //if(date != null) {
-                //LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-               // currPhase.setExceptionTime(exceptionDate);
-           //}
+//            Date date = rs.getDate("phExceptionTime");
+//            if(date != null) {
+//                LocalDate exceptionDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//                currPhase.setExceptionTime(exceptionDate);
+//           }
 
             crPhaseList.add(currPhase);
             ps.close();
@@ -336,7 +331,7 @@ public class DBConnection {
     	Phase currPhase = new Phase();
     	currPhase=pList.get(0);
     	System.out.println(currPhase);
-    	Date date =Date.from(currPhase.getTimeExtensionRequest().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    	java.util.Date date = Date.from(currPhase.getTimeExtensionRequest().atStartOfDay(ZoneId.systemDefault()).toInstant());
     	java.sql.Date sqlDate = new java.sql.Date(date.getTime());
     	
     	 try {
